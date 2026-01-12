@@ -311,7 +311,7 @@
         "key": "[%@](%@)",
         "location": {
           "startingColumn": 48,
-          "startingLine": 737
+          "startingLine": 749
         }
       },
       {
@@ -319,7 +319,7 @@
         "key": "All Entries",
         "location": {
           "startingColumn": 22,
-          "startingLine": 972
+          "startingLine": 984
         }
       },
       {
@@ -327,7 +327,7 @@
         "key": "%lld total",
         "location": {
           "startingColumn": 22,
-          "startingLine": 975
+          "startingLine": 987
         }
       },
       {
@@ -335,7 +335,7 @@
         "key": "•",
         "location": {
           "startingColumn": 26,
-          "startingLine": 1075
+          "startingLine": 1087
         }
       },
       {
@@ -343,7 +343,7 @@
         "key": "Download",
         "location": {
           "startingColumn": 42,
-          "startingLine": 1097
+          "startingLine": 1109
         }
       }
     ]

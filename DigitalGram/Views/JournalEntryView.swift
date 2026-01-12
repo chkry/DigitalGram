@@ -720,9 +720,21 @@ struct InteractiveMarkdownPreview: View {
             if let textRange = Range(match.range(at: 1), in: line),
                let urlRange = Range(match.range(at: 2), in: line) {
                 let linkText = String(line[textRange])
-                let urlString = String(line[urlRange])
+                var urlString = String(line[urlRange])
                 
-                if let url = URL(string: urlString) {
+                // Add scheme if missing
+                if !urlString.lowercased().hasPrefix("http://") && 
+                   !urlString.lowercased().hasPrefix("https://") &&
+                   !urlString.lowercased().hasPrefix("file://") &&
+                   !urlString.lowercased().hasPrefix("mailto:") {
+                    // Check if it looks like a web URL
+                    if urlString.contains(".") && !urlString.hasPrefix("/") {
+                        urlString = "https://" + urlString
+                    }
+                }
+                
+                if let url = URL(string: urlString), 
+                   url.scheme != nil {
                     result.append(AnyView(
                         Button(action: {
                             NSWorkspace.shared.open(url)
