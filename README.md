@@ -180,4 +180,27 @@ All data is stored locally on your device. No data is sent to external servers.
 
 ## License
 
-Free to use and modify for personal projects.
+MIT License - Copyright (c) 2026 chkry
+
+This project is open source under the MIT License. You are free to:
+- ✅ Use commercially
+- ✅ Modify
+- ✅ Distribute
+- ✅ Use privately
+
+**Attribution Required**: You must include the copyright notice and license in all copies or substantial portions of the software.
+
+See the [LICENSE](LICENSE) file for full details.
+
+## Contributing
+
+Contributions are welcome! If you use this code or build upon it:
+1. Please maintain the original license and attribution
+2. Consider submitting improvements back to the project
+3. Credit the original author (chkry) in your derivative works
+
+## Author
+
+Created by **chkry** (chkryreddy@gmail.com)
+
+If you find this project useful, please give it a ⭐ on GitHub!
