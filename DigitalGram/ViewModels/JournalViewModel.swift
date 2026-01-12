@@ -30,14 +30,12 @@ class JournalViewModel: ObservableObject {
     }
     
     func saveEntry(id: String, markdownContent: String, forDate date: Date) {
-        let now = Date()
-        
         if let existingIndex = entries.firstIndex(where: { $0.id == id }) {
-            // Update existing entry - preserve original date, update timestamp
+            // Update existing entry - preserve original date and created timestamp
             let updated = JournalEntry(
                 id: id,
                 date: entries[existingIndex].date,
-                timestamp: now,
+                created: entries[existingIndex].created,
                 markdownContent: markdownContent
             )
             entries[existingIndex] = updated
@@ -45,9 +43,7 @@ class JournalViewModel: ObservableObject {
         } else {
             // Create new entry with selected date
             let newEntry = JournalEntry(
-                id: id,
                 date: date,
-                timestamp: now,
                 markdownContent: markdownContent
             )
             entries.insert(newEntry, at: 0)
@@ -147,22 +143,12 @@ class JournalViewModel: ObservableObject {
     }
     
     private func generateCSV() -> String {
-        var csv = "Entry ID,Date,Timestamp,Markdown Content\\n"
+        var csv = "Date,Content,Created,Updated\\n"
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        
-        let timestampFormatter = DateFormatter()
-        timestampFormatter.dateStyle = .medium
-        timestampFormatter.timeStyle = .medium
-        
-        for entry in entries.sorted(by: { $0.timestamp > $1.timestamp }) {
-            let dateString = dateFormatter.string(from: entry.date)
-            let timestampString = timestampFormatter.string(from: entry.timestamp)
+        for entry in entries.sorted(by: { $0.date > $1.date }) {
             let escapedContent = escapeCSV(entry.markdownContent)
             
-            csv += "\(entry.id),\(dateString),\(timestampString),\(escapedContent)\\n"
+            csv += "\(entry.id),\(escapedContent),\(entry.created),\(entry.updated)\\n"
         }
         
         return csv
@@ -175,36 +161,26 @@ class JournalViewModel: ObservableObject {
         <?mso-application progid="Excel.Sheet"?>
         <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
-         <Worksheet ss:Name="Journal Entries">
+         <Worksheet ss:Name="Diary">
           <Table>
            <Row>
-            <Cell><Data ss:Type="String">Entry ID</Data></Cell>
             <Cell><Data ss:Type="String">Date</Data></Cell>
-            <Cell><Data ss:Type="String">Timestamp</Data></Cell>
-            <Cell><Data ss:Type="String">Markdown Content</Data></Cell>
+            <Cell><Data ss:Type="String">Content</Data></Cell>
+            <Cell><Data ss:Type="String">Created</Data></Cell>
+            <Cell><Data ss:Type="String">Updated</Data></Cell>
            </Row>
         """
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        
-        let timestampFormatter = DateFormatter()
-        timestampFormatter.dateStyle = .medium
-        timestampFormatter.timeStyle = .medium
-        
-        for entry in entries.sorted(by: { $0.timestamp > $1.timestamp }) {
-            let dateString = dateFormatter.string(from: entry.date)
-            let timestampString = timestampFormatter.string(from: entry.timestamp)
+        for entry in entries.sorted(by: { $0.date > $1.date }) {
             let escapedContent = escapeXML(entry.markdownContent)
             
             xml += """
             
                <Row>
                 <Cell><Data ss:Type="String">\(entry.id)</Data></Cell>
-                <Cell><Data ss:Type="String">\(dateString)</Data></Cell>
-                <Cell><Data ss:Type="String">\(timestampString)</Data></Cell>
                 <Cell><Data ss:Type="String">\(escapedContent)</Data></Cell>
+                <Cell><Data ss:Type="String">\(entry.created)</Data></Cell>
+                <Cell><Data ss:Type="String">\(entry.updated)</Data></Cell>
                </Row>
             """
         }

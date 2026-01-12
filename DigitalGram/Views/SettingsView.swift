@@ -438,7 +438,7 @@ struct SettingsView: View {
                         Button(action: {
                             if !selectedDatabase.isEmpty {
                                 databaseToRename = selectedDatabase
-                                newDatabaseName = selectedDatabase.replacingOccurrences(of: ".db", with: "")
+                                newDatabaseName = selectedDatabase.replacingOccurrences(of: ".db", with: "").replacingOccurrences(of: ".sqlite", with: "")
                                 showingRenameDialog = true
                             }
                         }) {
@@ -902,22 +902,12 @@ struct SettingsView: View {
     }
     
     private func generateCSV(entries: [JournalEntry]) -> String {
-        var csv = "Entry ID,Date,Timestamp,Markdown Content\n"
+        var csv = "Date,Content,Created,Updated\n"
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        
-        let timestampFormatter = DateFormatter()
-        timestampFormatter.dateStyle = .medium
-        timestampFormatter.timeStyle = .medium
-        
-        for entry in entries.sorted(by: { $0.timestamp > $1.timestamp }) {
-            let dateString = dateFormatter.string(from: entry.date)
-            let timestampString = timestampFormatter.string(from: entry.timestamp)
+        for entry in entries.sorted(by: { $0.date > $1.date }) {
             let escapedContent = "\"\(entry.markdownContent.replacingOccurrences(of: "\"", with: "\"\""))\""
             
-            csv += "\(entry.id),\(dateString),\(timestampString),\(escapedContent)\n"
+            csv += "\(entry.id),\(escapedContent),\(entry.created),\(entry.updated)\n"
         }
         
         return csv
@@ -929,27 +919,17 @@ struct SettingsView: View {
         <?mso-application progid="Excel.Sheet"?>
         <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">
-         <Worksheet ss:Name="Journal Entries">
+         <Worksheet ss:Name="Diary">
           <Table>
            <Row>
-            <Cell><Data ss:Type="String">Entry ID</Data></Cell>
             <Cell><Data ss:Type="String">Date</Data></Cell>
-            <Cell><Data ss:Type="String">Timestamp</Data></Cell>
-            <Cell><Data ss:Type="String">Markdown Content</Data></Cell>
+            <Cell><Data ss:Type="String">Content</Data></Cell>
+            <Cell><Data ss:Type="String">Created</Data></Cell>
+            <Cell><Data ss:Type="String">Updated</Data></Cell>
            </Row>
         """
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        
-        let timestampFormatter = DateFormatter()
-        timestampFormatter.dateStyle = .medium
-        timestampFormatter.timeStyle = .medium
-        
-        for entry in entries.sorted(by: { $0.timestamp > $1.timestamp }) {
-            let dateString = dateFormatter.string(from: entry.date)
-            let timestampString = timestampFormatter.string(from: entry.timestamp)
+        for entry in entries.sorted(by: { $0.date > $1.date }) {
             let escapedContent = entry.markdownContent
                 .replacingOccurrences(of: "&", with: "&amp;")
                 .replacingOccurrences(of: "<", with: "&lt;")
@@ -958,9 +938,9 @@ struct SettingsView: View {
             xml += """
                <Row>
                 <Cell><Data ss:Type="String">\(entry.id)</Data></Cell>
-                <Cell><Data ss:Type="String">\(dateString)</Data></Cell>
-                <Cell><Data ss:Type="String">\(timestampString)</Data></Cell>
                 <Cell><Data ss:Type="String">\(escapedContent)</Data></Cell>
+                <Cell><Data ss:Type="String">\(entry.created)</Data></Cell>
+                <Cell><Data ss:Type="String">\(entry.updated)</Data></Cell>
                </Row>
             """
         }
@@ -980,12 +960,9 @@ struct SettingsView: View {
         let storageManager = StorageManager.shared
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        let timestampFormatter = DateFormatter()
-        timestampFormatter.dateStyle = .medium
-        timestampFormatter.timeStyle = .medium
+        let iso8601Formatter = ISO8601DateFormatter()
         
         // Skip header row
         for line in lines.dropFirst() {
@@ -993,21 +970,21 @@ struct SettingsView: View {
             
             // Parse CSV line (handle quoted fields)
             let fields = parseCSVLine(line)
-            guard fields.count >= 4 else { continue }
+            guard fields.count >= 3 else { continue }
             
-            let id = fields[0]
-            guard let date = dateFormatter.date(from: fields[1]),
-                  let timestamp = timestampFormatter.date(from: fields[2]) else {
+            // Expecting format: date,content,created[,updated]
+            let dateString = fields[0]
+            let content = fields[1]
+            let created = fields.count > 2 ? fields[2] : iso8601Formatter.string(from: Date())
+            
+            // Parse date to get Date object
+            guard let date = dateFormatter.date(from: dateString) else {
                 continue
             }
             
-            let markdownContent = fields[3]
-            
             let entry = JournalEntry(
-                id: id,
                 date: date,
-                timestamp: timestamp,
-                markdownContent: markdownContent
+                markdownContent: content
             )
             
             storageManager.saveEntry(entry)
@@ -1053,7 +1030,7 @@ struct SettingsView: View {
         do {
             let contents = try FileManager.default.contentsOfDirectory(at: storageURL, includingPropertiesForKeys: nil)
             availableDatabases = contents
-                .filter { $0.pathExtension == "db" }
+                .filter { $0.pathExtension == "db" || $0.pathExtension == "sqlite" }
                 .map { $0.lastPathComponent }
                 .sorted()
             
@@ -1078,10 +1055,15 @@ struct SettingsView: View {
     }
     
     private func sanitizeDatabaseName(_ name: String) -> String {
-        // Remove .db extension if present
-        let nameWithoutExtension = name.hasSuffix(".db") ? String(name.dropLast(3)) : name
+        // Remove .db or .sqlite extension if present
+        var nameWithoutExtension = name
+        if name.hasSuffix(".db") {
+            nameWithoutExtension = String(name.dropLast(3))
+        } else if name.hasSuffix(".sqlite") {
+            nameWithoutExtension = String(name.dropLast(7))
+        }
         
-        // Return with .db extension
+        // Return with .db extension (default)
         return "\(nameWithoutExtension).db"
     }
 
@@ -1110,15 +1092,25 @@ struct SettingsView: View {
         // Create empty database
         var db: OpaquePointer?
         if sqlite3_open(dbPath, &db) == SQLITE_OK {
+            // Create android_metadata table
+            let createMetadataQuery = """
+            CREATE TABLE IF NOT EXISTS android_metadata (locale TEXT);
+            INSERT INTO android_metadata VALUES ('en_US');
+            """
+            sqlite3_exec(db, createMetadataQuery, nil, nil, nil)
+            
+            // Create diary table
             let createTableQuery = """
-            CREATE TABLE IF NOT EXISTS journal_entries (
-                id TEXT PRIMARY KEY,
-                date TEXT NOT NULL,
-                timestamp TEXT NOT NULL,
-                markdown_content TEXT NOT NULL
+            CREATE TABLE IF NOT EXISTS diary (
+                date TEXT NOT NULL PRIMARY KEY,
+                year INTEGER NOT NULL,
+                month INTEGER NOT NULL,
+                day INTEGER NOT NULL,
+                content TEXT NOT NULL,
+                created TEXT NOT NULL,
+                updated TEXT
             );
-            CREATE INDEX IF NOT EXISTS idx_date ON journal_entries(date);
-            CREATE INDEX IF NOT EXISTS idx_timestamp ON journal_entries(timestamp);
+            CREATE INDEX IF NOT EXISTS diary_idx_0 ON diary (year, month);
             """
             
             var statement: OpaquePointer?
@@ -1148,13 +1140,20 @@ struct SettingsView: View {
         panel.message = "Select a database file to import"
         panel.prompt = "Import"
         
-        // Filter for .db files
+        // Filter for .db and .sqlite files
         if #available(macOS 11.0, *) {
+            var allowedTypes: [UTType] = []
             if let dbType = UTType(filenameExtension: "db") {
-                panel.allowedContentTypes = [dbType]
+                allowedTypes.append(dbType)
+            }
+            if let sqliteType = UTType(filenameExtension: "sqlite") {
+                allowedTypes.append(sqliteType)
+            }
+            if !allowedTypes.isEmpty {
+                panel.allowedContentTypes = allowedTypes
             }
         } else {
-            panel.allowedFileTypes = ["db"]
+            panel.allowedFileTypes = ["db", "sqlite"]
         }
         
         if let window = NSApp.keyWindow {
@@ -1176,13 +1175,20 @@ struct SettingsView: View {
         panel.prompt = "Export"
         panel.nameFieldStringValue = selectedDatabase
         
-        // Filter for .db files
+        // Filter for .db and .sqlite files
         if #available(macOS 11.0, *) {
+            var allowedTypes: [UTType] = []
             if let dbType = UTType(filenameExtension: "db") {
-                panel.allowedContentTypes = [dbType]
+                allowedTypes.append(dbType)
+            }
+            if let sqliteType = UTType(filenameExtension: "sqlite") {
+                allowedTypes.append(sqliteType)
+            }
+            if !allowedTypes.isEmpty {
+                panel.allowedContentTypes = allowedTypes
             }
         } else {
-            panel.allowedFileTypes = ["db"]
+            panel.allowedFileTypes = ["db", "sqlite"]
         }
         
         // Ensure panel appears on top
@@ -1300,8 +1306,8 @@ struct SettingsView: View {
             return
         }
         
-        // Add .db extension if not present
-        if !dbName.hasSuffix(".db") {
+// Add .db extension if not present (unless it already has .sqlite)
+        if !dbName.hasSuffix(".db") && !dbName.hasSuffix(".sqlite") {
             dbName += ".db"
         }
         

@@ -1007,9 +1007,11 @@ struct EntryRow: View {
                     Text(entry.date.formatted(date: .abbreviated, time: .omitted))
                         .font(.headline)
                     Spacer()
-                    Text(entry.timestamp.formatted(date: .omitted, time: .shortened))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                    if let createdDate = ISO8601DateFormatter().date(from: entry.created) {
+                        Text(createdDate.formatted(date: .omitted, time: .shortened))
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
                 }
                 
                 Text(entry.markdownContent.prefix(150))

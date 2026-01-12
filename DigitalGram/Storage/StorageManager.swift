@@ -123,52 +123,80 @@ class StorageManager {
     }
     
     private func createTable() {
-        let createTableQuery = """
-        CREATE TABLE IF NOT EXISTS journal_entries (
-            id TEXT PRIMARY KEY,
-            date TEXT NOT NULL,
-            timestamp TEXT NOT NULL,
-            markdown_content TEXT NOT NULL
-        );
-        
-        CREATE INDEX IF NOT EXISTS idx_date ON journal_entries(date);
-        CREATE INDEX IF NOT EXISTS idx_timestamp ON journal_entries(timestamp);
+        // Create android_metadata table
+        let createMetadataQuery = """
+        CREATE TABLE IF NOT EXISTS android_metadata (locale TEXT);
         """
         
         var statement: OpaquePointer?
-        
-        if sqlite3_prepare_v2(db, createTableQuery, -1, &statement, nil) == SQLITE_OK {
-            if sqlite3_step(statement) == SQLITE_DONE {
-                #if DEBUG
-                print("Table created successfully")
-                #endif
+        if sqlite3_exec(db, createMetadataQuery, nil, nil, nil) == SQLITE_OK {
+            // Insert default locale if table is empty
+            let checkQuery = "SELECT COUNT(*) FROM android_metadata;"
+            if sqlite3_prepare_v2(db, checkQuery, -1, &statement, nil) == SQLITE_OK {
+                if sqlite3_step(statement) == SQLITE_ROW {
+                    let count = sqlite3_column_int(statement, 0)
+                    if count == 0 {
+                        sqlite3_exec(db, "INSERT INTO android_metadata VALUES ('en_US');", nil, nil, nil)
+                    }
+                }
             }
+            sqlite3_finalize(statement)
+        }
+        
+        // Create diary table
+        let createTableQuery = """
+        CREATE TABLE IF NOT EXISTS diary (
+            date TEXT NOT NULL PRIMARY KEY,
+            year INTEGER NOT NULL,
+            month INTEGER NOT NULL,
+            day INTEGER NOT NULL,
+            content TEXT NOT NULL,
+            created TEXT NOT NULL,
+            updated TEXT
+        );
+        """
+        
+        if sqlite3_exec(db, createTableQuery, nil, nil, nil) == SQLITE_OK {
+            #if DEBUG
+            print("Diary table created successfully")
+            #endif
         } else {
             #if DEBUG
-            let errorMessage = String(cString: sqlite3_errmsg(db)!)
-            print("Error creating table: \(errorMessage)")
+            if let errorMessage = sqlite3_errmsg(db) {
+                print("Error creating diary table: \(String(cString: errorMessage))")
+            }
             #endif
         }
         
-        sqlite3_finalize(statement)
+        // Create index
+        let createIndexQuery = "CREATE INDEX IF NOT EXISTS diary_idx_0 ON diary (year, month);"
+        if sqlite3_exec(db, createIndexQuery, nil, nil, nil) == SQLITE_OK {
+            #if DEBUG
+            print("Index created successfully")
+            #endif
+        }
     }
     
     func saveEntry(_ entry: JournalEntry) {
-        let dateString = dateFormatter.string(from: entry.date)
-        let timestampString = dateFormatter.string(from: entry.timestamp)
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: entry.date)
+        let dateString = String(format: "%04d-%02d-%02d", components.year!, components.month!, components.day!)
         
         let insertQuery = """
-        INSERT OR REPLACE INTO journal_entries (id, date, timestamp, markdown_content)
-        VALUES (?, ?, ?, ?);
+        INSERT OR REPLACE INTO diary (date, year, month, day, content, created, updated)
+        VALUES (?, ?, ?, ?, ?, ?, ?);
         """
         
         var statement: OpaquePointer?
         
         if sqlite3_prepare_v2(db, insertQuery, -1, &statement, nil) == SQLITE_OK {
-            sqlite3_bind_text(statement, 1, (entry.id as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(statement, 2, (dateString as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(statement, 3, (timestampString as NSString).utf8String, -1, nil)
-            sqlite3_bind_text(statement, 4, (entry.markdownContent as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 1, (dateString as NSString).utf8String, -1, nil)
+            sqlite3_bind_int(statement, 2, Int32(components.year!))
+            sqlite3_bind_int(statement, 3, Int32(components.month!))
+            sqlite3_bind_int(statement, 4, Int32(components.day!))
+            sqlite3_bind_text(statement, 5, (entry.markdownContent as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 6, (entry.created as NSString).utf8String, -1, nil)
+            sqlite3_bind_text(statement, 7, (entry.updated as NSString).utf8String, -1, nil)
             
             if sqlite3_step(statement) == SQLITE_DONE {
                 #if DEBUG
@@ -189,17 +217,20 @@ class StorageManager {
         var entries: [JournalEntry] = []
         entries.reserveCapacity(100) // Pre-allocate for typical usage
         
-        let query = "SELECT id, date, timestamp, markdown_content FROM journal_entries ORDER BY timestamp DESC;"
+        let query = "SELECT date, year, month, day, content, created, updated FROM diary ORDER BY date DESC;"
         var statement: OpaquePointer?
         
         if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
             while sqlite3_step(statement) == SQLITE_ROW {
-                let id = String(cString: sqlite3_column_text(statement, 0))
-                let date = String(cString: sqlite3_column_text(statement, 1))
-                let timestamp = String(cString: sqlite3_column_text(statement, 2))
-                let content = String(cString: sqlite3_column_text(statement, 3))
+                let dateString = String(cString: sqlite3_column_text(statement, 0))
+                let year = sqlite3_column_int(statement, 1)
+                let month = sqlite3_column_int(statement, 2)
+                let day = sqlite3_column_int(statement, 3)
+                let content = String(cString: sqlite3_column_text(statement, 4))
+                let created = String(cString: sqlite3_column_text(statement, 5))
+                let updated = sqlite3_column_text(statement, 6) != nil ? String(cString: sqlite3_column_text(statement, 6)) : created
                 
-                let entry = JournalEntry(id: id, dateString: date, timestampString: timestamp, markdownContent: content)
+                let entry = JournalEntry(dateString: dateString, year: Int(year), month: Int(month), day: Int(day), created: created, updated: updated, markdownContent: content)
                 entries.append(entry)
             }
         }
@@ -212,7 +243,8 @@ class StorageManager {
     }
     
     func deleteEntry(id: String) {
-        let deleteQuery = "DELETE FROM journal_entries WHERE id = ?;"
+        // id is now the date string in YYYY-MM-DD format
+        let deleteQuery = "DELETE FROM diary WHERE date = ?;";
         var statement: OpaquePointer?
         
         if sqlite3_prepare_v2(db, deleteQuery, -1, &statement, nil) == SQLITE_OK {
