@@ -216,6 +216,47 @@ struct SettingsView: View {
         .onAppear {
             loadAvailableDatabases()
         }
+        .alert("Migrate Data", isPresented: $showingMigrationAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(migrationMessage)
+        }
+        .alert("Import/Export", isPresented: $showingImportExportAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(importExportMessage)
+        }
+        .alert("Database Operation", isPresented: $showingDatabaseOperationAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(databaseOperationMessage)
+        }
+        .alert("Create New Database", isPresented: $showingCreateDialog) {
+            TextField("Database Name", text: $createDatabaseName)
+            Button("Cancel", role: .cancel) { }
+            Button("Create") {
+                createNewDatabase(createDatabaseName)
+            }
+        } message: {
+            Text("Enter a name for the new database")
+        }
+        .alert("Delete Database", isPresented: $showingDeleteConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                deleteDatabase(databaseToDelete)
+            }
+        } message: {
+            Text("Are you sure you want to delete '\(databaseToDelete)'? This action cannot be undone.")
+        }
+        .alert("Rename Database", isPresented: $showingRenameDialog) {
+            TextField("New Name", text: $newDatabaseName)
+            Button("Cancel", role: .cancel) { }
+            Button("Rename") {
+                renameDatabase(from: databaseToRename, to: newDatabaseName)
+            }
+        } message: {
+            Text("Enter a new name for '\(databaseToRename)'")
+        }
     }
     
     private var settingsHeader: some View {
@@ -290,6 +331,7 @@ struct SettingsView: View {
                         }
                         
                         Button("Open in Finder") {
+                            NSApp.activate(ignoringOtherApps: true)
                             NSWorkspace.shared.open(URL(fileURLWithPath: storagePath))
                         }
                         
