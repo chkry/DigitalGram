@@ -6,7 +6,7 @@
 set -e
 
 APP_NAME="DigitalGram"
-VERSION="1.0.0"
+VERSION="1.1"
 DMG_NAME="${APP_NAME}-${VERSION}"
 BUILD_DIR="build/Release"
 DMG_DIR="dmg_temp"
@@ -42,6 +42,9 @@ mkdir -p "${DMG_DIR}"
 
 # Copy the app
 cp -R "build/Build/Products/Release/${APP_NAME}.app" "${DMG_DIR}/"
+
+# Copy installation instructions
+cp FIRST_RUN.txt "${DMG_DIR}/📖 READ ME FIRST.txt"
 
 # Create Applications symlink
 ln -s /Applications "${DMG_DIR}/Applications"

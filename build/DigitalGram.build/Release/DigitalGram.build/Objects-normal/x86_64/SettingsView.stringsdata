@@ -1,0 +1,312 @@
+{
+  "source": "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/Views/SettingsView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Changes are applied immediately",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 105
+        }
+      },
+      {
+        "comment": "",
+        "key": "Settings",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 121
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 125
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose your color theme",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 144
+        }
+      },
+      {
+        "comment": "",
+        "key": "Theme",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 141
+        }
+      },
+      {
+        "comment": "",
+        "key": "Database and images are stored here:",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 167
+        }
+      },
+      {
+        "comment": "",
+        "key": "Storage Location",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 164
+        }
+      },
+      {
+        "comment": "",
+        "key": "Change Location...",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 183
+        }
+      },
+      {
+        "comment": "",
+        "key": "Open in Finder",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 187
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reset to Default",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 191
+        }
+      },
+      {
+        "comment": "",
+        "key": "Manage multiple journal databases",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 209
+        }
+      },
+      {
+        "comment": "",
+        "key": "Currently active: %@",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 308
+        }
+      },
+      {
+        "comment": "",
+        "key": "Databases",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 206
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create new database",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 251
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import existing database",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 260
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export selected database",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 270
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete selected database",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 286
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rename selected database",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 303
+        }
+      },
+      {
+        "comment": "",
+        "key": "Backup or restore your journal entries",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 325
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import & Export",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 322
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 332
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export as CSV",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 340
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export as Excel",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 349
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 361
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import will merge entries. Existing entries with the same ID will be updated.",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 375
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import from CSV",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 368
+        }
+      },
+      {
+        "comment": "",
+        "key": "All journal entries and images are stored locally on your Mac. No data is synced to the cloud.",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 402
+        }
+      },
+      {
+        "comment": "",
+        "key": "Database Information",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 389
+        }
+      },
+      {
+        "comment": "",
+        "key": "About",
+        "location": {
+          "startingColumn": 27,
+          "startingLine": 414
+        }
+      },
+      {
+        "comment": "",
+        "key": "Author",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 419
+        }
+      },
+      {
+        "comment": "",
+        "key": "Chakradhar Reddy Pakala",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 422
+        }
+      },
+      {
+        "comment": "",
+        "key": "github.com/chkry",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 433
+        }
+      },
+      {
+        "comment": "",
+        "key": "linkedin.com/in/chkry",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 446
+        }
+      },
+      {
+        "comment": "",
+        "key": "www.chakrireddy.com",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 459
+        }
+      },
+      {
+        "comment": "",
+        "key": "Your feedback helps make DigitalGram better!",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 494
+        }
+      },
+      {
+        "comment": "",
+        "key": "Feedback & Feature Requests",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 475
+        }
+      },
+      {
+        "comment": "",
+        "key": "Send your suggestions to:",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 481
+        }
+      },
+      {
+        "comment": "",
+        "key": "ChakradharReddyPakala@gmail.com",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 484
+        }
+      }
+    ]
+  },
+  "version": 1
+}

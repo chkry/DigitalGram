@@ -1,0 +1,30 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📱 DigitalGram - First Time Installation
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+macOS will block this app because it's not from the App Store.
+
+✅ TO OPEN DIGITALGRAM:
+
+  1. Drag DigitalGram to your Applications folder
+  2. RIGHT-CLICK (or Control+click) on DigitalGram.app
+  3. Select "Open" from the menu
+  4. Click "Open" in the security dialog
+  
+  That's it! DigitalGram will open normally from now on.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ALTERNATIVE: Use Terminal to remove the security block
+
+  Open Terminal and run:
+  
+    xattr -cr /Applications/DigitalGram.app
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For detailed instructions, see INSTALLATION.md
+
+Questions? Email: ChakradharReddyPakala@gmail.com
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

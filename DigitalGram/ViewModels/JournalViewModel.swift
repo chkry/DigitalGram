@@ -81,6 +81,7 @@ class JournalViewModel: ObservableObject {
                 self.handleExcelExport(savePanel: savePanel, response: response, excelContent: excelContent)
             }
         } else {
+            NSApp.activate(ignoringOtherApps: true)
             let response = savePanel.runModal()
             handleExcelExport(savePanel: savePanel, response: response, excelContent: excelContent)
         }
@@ -121,6 +122,7 @@ class JournalViewModel: ObservableObject {
                 self.handleCSVExport(savePanel: savePanel, response: response, csvContent: csvContent)
             }
         } else {
+            NSApp.activate(ignoringOtherApps: true)
             let response = savePanel.runModal()
             handleCSVExport(savePanel: savePanel, response: response, csvContent: csvContent)
         }

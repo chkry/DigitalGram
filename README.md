@@ -37,16 +37,41 @@ A simple macOS menu bar application for daily journaling with formatting options
 
 ## Installation
 
-### Quick Start (Recommended)
+### From DMG (Recommended)
 
-1. Open Terminal and navigate to the MenuBarApp folder
+1. **Download** `DigitalGram-1.1.dmg`
+2. **Open the DMG** - Double-click the DMG file
+3. **Read the instructions** - Check the "📖 READ ME FIRST.txt" file in the DMG
+4. **Drag to Applications** - Drag DigitalGram.app to the Applications folder
+
+⚠️ **Important First-Time Security Step:**
+
+macOS will block the app on first launch. To allow it:
+- **Right-click** (or Control+click) on DigitalGram.app in Applications
+- Select **"Open"** from the menu
+- Click **"Open"** in the security dialog
+
+After this one-time step, DigitalGram will open normally. See [INSTALLATION.md](INSTALLATION.md) for detailed instructions and alternative methods.
+
+### Building from Source
+
+#### Quick Start
+
+1. Open Terminal and navigate to the project folder
 2. Run the build script:
    ```bash
    ./build.sh
    ```
 3. The app will be built and you can choose to launch it immediately
 
-### Using Xcode
+#### Create DMG
+
+To create a distributable DMG:
+```bash
+./create_dmg.sh
+```
+
+#### Using Xcode
 
 1. Double-click `DigitalGram.xcodeproj` to open in Xcode
 2. Select your development team in Signing & Capabilities tab (if required)

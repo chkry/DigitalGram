@@ -1,445 +1,309 @@
 {
-  "source": "/Users/chkry/Documents/CODE/MenuBarApp/DigitalGram/Views/SettingsView.swift",
+  "source": "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/Views/SettingsView.swift",
   "tables": {
     "Localizable": [
       {
         "comment": "",
-        "key": "Database Migration",
+        "key": "Changes are applied immediately",
         "location": {
-          "startingColumn": 16,
-          "startingLine": 425
-        }
-      },
-      {
-        "comment": "",
-        "key": "Import/Export",
-        "location": {
-          "startingColumn": 16,
-          "startingLine": 430
-        }
-      },
-      {
-        "comment": "",
-        "key": "Database",
-        "location": {
-          "startingColumn": 16,
-          "startingLine": 435
-        }
-      },
-      {
-        "comment": "",
-        "key": "Delete Database",
-        "location": {
-          "startingColumn": 16,
-          "startingLine": 440
-        }
-      },
-      {
-        "comment": "",
-        "key": "Rename Database",
-        "location": {
-          "startingColumn": 16,
-          "startingLine": 448
-        }
-      },
-      {
-        "comment": "",
-        "key": "Create Database",
-        "location": {
-          "startingColumn": 16,
-          "startingLine": 457
+          "startingColumn": 22,
+          "startingLine": 207
         }
       },
       {
         "comment": "",
         "key": "Settings",
         "location": {
-          "startingColumn": 22,
-          "startingLine": 39
+          "startingColumn": 18,
+          "startingLine": 223
         }
       },
       {
         "comment": "",
         "key": "Done",
         "location": {
-          "startingColumn": 24,
-          "startingLine": 43
+          "startingColumn": 20,
+          "startingLine": 227
+        }
+      },
+      {
+        "comment": "",
+        "key": "Choose your color theme",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 246
+        }
+      },
+      {
+        "comment": "",
+        "key": "Theme",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 243
         }
       },
       {
         "comment": "",
         "key": "Database and images are stored here:",
         "location": {
-          "startingColumn": 34,
-          "startingLine": 65
+          "startingColumn": 22,
+          "startingLine": 272
         }
       },
       {
         "comment": "",
         "key": "Storage Location",
         "location": {
-          "startingColumn": 35,
-          "startingLine": 62
+          "startingColumn": 23,
+          "startingLine": 269
         }
       },
       {
         "comment": "",
         "key": "Change Location...",
         "location": {
-          "startingColumn": 44,
-          "startingLine": 81
+          "startingColumn": 32,
+          "startingLine": 288
         }
       },
       {
         "comment": "",
         "key": "Open in Finder",
         "location": {
-          "startingColumn": 44,
-          "startingLine": 85
+          "startingColumn": 32,
+          "startingLine": 292
         }
       },
       {
         "comment": "",
         "key": "Reset to Default",
         "location": {
-          "startingColumn": 44,
-          "startingLine": 89
+          "startingColumn": 32,
+          "startingLine": 296
         }
       },
       {
         "comment": "",
         "key": "Manage multiple journal databases",
         "location": {
-          "startingColumn": 34,
-          "startingLine": 106
+          "startingColumn": 22,
+          "startingLine": 314
         }
       },
       {
         "comment": "",
         "key": "Currently active: %@",
         "location": {
-          "startingColumn": 34,
-          "startingLine": 198
+          "startingColumn": 22,
+          "startingLine": 413
         }
       },
       {
         "comment": "",
         "key": "Databases",
         "location": {
-          "startingColumn": 35,
-          "startingLine": 103
+          "startingColumn": 23,
+          "startingLine": 311
         }
       },
       {
         "comment": "",
         "key": "Create new database",
         "location": {
-          "startingColumn": 43,
-          "startingLine": 154
+          "startingColumn": 31,
+          "startingLine": 356
         }
       },
       {
         "comment": "",
         "key": "Import existing database",
         "location": {
-          "startingColumn": 43,
-          "startingLine": 163
+          "startingColumn": 31,
+          "startingLine": 365
+        }
+      },
+      {
+        "comment": "",
+        "key": "Export selected database",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 375
         }
       },
       {
         "comment": "",
         "key": "Delete selected database",
         "location": {
-          "startingColumn": 43,
-          "startingLine": 176
+          "startingColumn": 31,
+          "startingLine": 391
         }
       },
       {
         "comment": "",
         "key": "Rename selected database",
         "location": {
-          "startingColumn": 43,
-          "startingLine": 193
+          "startingColumn": 31,
+          "startingLine": 408
         }
       },
       {
         "comment": "",
         "key": "Backup or restore your journal entries",
         "location": {
-          "startingColumn": 34,
-          "startingLine": 212
+          "startingColumn": 26,
+          "startingLine": 430
         }
       },
       {
         "comment": "",
         "key": "Import & Export",
         "location": {
-          "startingColumn": 35,
-          "startingLine": 209
+          "startingColumn": 27,
+          "startingLine": 427
         }
       },
       {
         "comment": "",
         "key": "Export",
         "location": {
-          "startingColumn": 42,
-          "startingLine": 219
+          "startingColumn": 34,
+          "startingLine": 437
         }
       },
       {
         "comment": "",
         "key": "Export as CSV",
         "location": {
-          "startingColumn": 54,
-          "startingLine": 227
+          "startingColumn": 46,
+          "startingLine": 445
         }
       },
       {
         "comment": "",
         "key": "Export as Excel",
         "location": {
-          "startingColumn": 54,
-          "startingLine": 236
+          "startingColumn": 46,
+          "startingLine": 454
         }
       },
       {
         "comment": "",
         "key": "Import",
         "location": {
-          "startingColumn": 42,
-          "startingLine": 248
+          "startingColumn": 34,
+          "startingLine": 466
         }
       },
       {
         "comment": "",
         "key": "Import will merge entries. Existing entries with the same ID will be updated.",
         "location": {
-          "startingColumn": 42,
-          "startingLine": 262
+          "startingColumn": 34,
+          "startingLine": 480
         }
       },
       {
         "comment": "",
         "key": "Import from CSV",
         "location": {
-          "startingColumn": 50,
-          "startingLine": 255
+          "startingColumn": 42,
+          "startingLine": 473
         }
       },
       {
         "comment": "",
         "key": "All journal entries and images are stored locally on your Mac. No data is synced to the cloud.",
         "location": {
-          "startingColumn": 34,
-          "startingLine": 289
+          "startingColumn": 26,
+          "startingLine": 507
         }
       },
       {
         "comment": "",
         "key": "Database Information",
         "location": {
-          "startingColumn": 35,
-          "startingLine": 276
+          "startingColumn": 27,
+          "startingLine": 494
         }
       },
       {
         "comment": "",
         "key": "About",
         "location": {
-          "startingColumn": 35,
-          "startingLine": 301
+          "startingColumn": 27,
+          "startingLine": 519
         }
       },
       {
         "comment": "",
         "key": "Author",
         "location": {
-          "startingColumn": 42,
-          "startingLine": 306
+          "startingColumn": 34,
+          "startingLine": 524
         }
       },
       {
         "comment": "",
         "key": "Chakradhar Reddy Pakala",
         "location": {
-          "startingColumn": 42,
-          "startingLine": 309
+          "startingColumn": 34,
+          "startingLine": 527
         }
       },
       {
         "comment": "",
         "key": "github.com/chkry",
         "location": {
-          "startingColumn": 48,
-          "startingLine": 320
+          "startingColumn": 40,
+          "startingLine": 538
         }
       },
       {
         "comment": "",
         "key": "linkedin.com/in/chkry",
         "location": {
-          "startingColumn": 48,
-          "startingLine": 333
+          "startingColumn": 40,
+          "startingLine": 551
         }
       },
       {
         "comment": "",
         "key": "www.chakrireddy.com",
         "location": {
-          "startingColumn": 48,
-          "startingLine": 346
+          "startingColumn": 40,
+          "startingLine": 564
         }
       },
       {
         "comment": "",
         "key": "Your feedback helps make DigitalGram better!",
         "location": {
-          "startingColumn": 42,
-          "startingLine": 381
+          "startingColumn": 34,
+          "startingLine": 599
         }
       },
       {
         "comment": "",
         "key": "Feedback & Feature Requests",
         "location": {
-          "startingColumn": 46,
-          "startingLine": 362
+          "startingColumn": 38,
+          "startingLine": 580
         }
       },
       {
         "comment": "",
         "key": "Send your suggestions to:",
         "location": {
-          "startingColumn": 46,
-          "startingLine": 368
+          "startingColumn": 38,
+          "startingLine": 586
         }
       },
       {
         "comment": "",
         "key": "ChakradharReddyPakala@gmail.com",
         "location": {
-          "startingColumn": 48,
-          "startingLine": 371
-        }
-      },
-      {
-        "comment": "",
-        "key": "Changes are applied immediately",
-        "location": {
-          "startingColumn": 22,
-          "startingLine": 401
-        }
-      },
-      {
-        "comment": "",
-        "key": "OK",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 426
-        }
-      },
-      {
-        "comment": "",
-        "key": "OK",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 431
-        }
-      },
-      {
-        "comment": "",
-        "key": "OK",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 436
-        }
-      },
-      {
-        "comment": "",
-        "key": "Cancel",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 441
-        }
-      },
-      {
-        "comment": "",
-        "key": "Delete",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 442
-        }
-      },
-      {
-        "comment": "",
-        "key": "Are you sure you want to delete '%@'?\n\nThis action cannot be undone. All journal entries in this database will be permanently deleted.",
-        "location": {
-          "startingColumn": 18,
-          "startingLine": 446
-        }
-      },
-      {
-        "comment": "",
-        "key": "New name",
-        "location": {
-          "startingColumn": 23,
-          "startingLine": 449
-        }
-      },
-      {
-        "comment": "",
-        "key": "Cancel",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 450
-        }
-      },
-      {
-        "comment": "",
-        "key": "Rename",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 451
-        }
-      },
-      {
-        "comment": "",
-        "key": "Enter a new name for '%@'",
-        "location": {
-          "startingColumn": 18,
-          "startingLine": 455
-        }
-      },
-      {
-        "comment": "",
-        "key": "Database name",
-        "location": {
-          "startingColumn": 23,
-          "startingLine": 458
-        }
-      },
-      {
-        "comment": "",
-        "key": "Cancel",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 459
-        }
-      },
-      {
-        "comment": "",
-        "key": "Create",
-        "location": {
-          "startingColumn": 20,
-          "startingLine": 460
-        }
-      },
-      {
-        "comment": "",
-        "key": "Enter a name for the new database",
-        "location": {
-          "startingColumn": 18,
-          "startingLine": 464
+          "startingColumn": 40,
+          "startingLine": 589
         }
       }
     ]

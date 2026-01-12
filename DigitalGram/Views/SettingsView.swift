@@ -2,6 +2,156 @@ import SwiftUI
 import SQLite3
 import UniformTypeIdentifiers
 
+enum AppTheme: String, CaseIterable, Codable {
+    case dracula = "Dracula"
+    case monokai = "Monokai"
+    case tokyoNight = "Tokyo Night"
+    case catppuccin = "Catppuccin Mocha"
+    case synthwave = "Synthwave '84"
+    case githubDark = "GitHub Dark"
+    case nord = "Nord"
+    case materialOcean = "Material Ocean"
+    case gruvbox = "Gruvbox"
+    case roseGarden = "Rose Garden"
+    case earthyOlive = "Earthy Olive"
+    
+    var displayName: String {
+        return self.rawValue
+    }
+    
+    var lightBackground: Color {
+        switch self {
+        case .dracula: return Color(red: 0xF8/255, green: 0xF8/255, blue: 0xF2/255)
+        case .monokai: return Color(red: 0xFC/255, green: 0xF4/255, blue: 0xDC/255)
+        case .tokyoNight: return Color(red: 0xD5/255, green: 0xD6/255, blue: 0xDB/255)
+        case .catppuccin: return Color(red: 0xEF/255, green: 0xF1/255, blue: 0xF5/255)
+        case .synthwave: return Color(red: 0x2A/255, green: 0x2D/255, blue: 0x3E/255)
+        case .githubDark: return Color(red: 0xFF/255, green: 0xFF/255, blue: 0xFF/255)
+        case .nord: return Color(red: 0xEC/255, green: 0xEF/255, blue: 0xF4/255)
+        case .materialOcean: return Color(red: 0xEE/255, green: 0xF1/255, blue: 0xF8/255)
+        case .gruvbox: return Color(red: 0xFB/255, green: 0xF1/255, blue: 0xC7/255)
+        case .roseGarden: return Color(red: 0xE2/255, green: 0xDD/255, blue: 0xD7/255)
+        case .earthyOlive: return Color(red: 0xE2/255, green: 0xDD/255, blue: 0xD7/255)
+        }
+    }
+    
+    var lightCodeBackground: Color {
+        switch self {
+        case .dracula: return Color(red: 0xF5/255, green: 0xF5/255, blue: 0xF5/255)
+        case .monokai: return Color(red: 0xF5/255, green: 0xE7/255, blue: 0xC3/255)
+        case .tokyoNight: return Color(red: 0xC8/255, green: 0xCA/255, blue: 0xD0/255)
+        case .catppuccin: return Color(red: 0xE6/255, green: 0xE9/255, blue: 0xEF/255)
+        case .synthwave: return Color(red: 0x24/255, green: 0x28/255, blue: 0x36/255)
+        case .githubDark: return Color(red: 0xF6/255, green: 0xF8/255, blue: 0xFA/255)
+        case .nord: return Color(red: 0xE5/255, green: 0xE9/255, blue: 0xF0/255)
+        case .materialOcean: return Color(red: 0xE4/255, green: 0xE7/255, blue: 0xF2/255)
+        case .gruvbox: return Color(red: 0xEB/255, green: 0xDB/255, blue: 0xB2/255)
+        case .roseGarden: return Color(red: 0xD8/255, green: 0xCE/255, blue: 0xC5/255)
+        case .earthyOlive: return Color(red: 0xD8/255, green: 0xCE/255, blue: 0xC5/255)
+        }
+    }
+    
+    var lightLinkColor: Color {
+        switch self {
+        case .dracula: return Color(red: 0xFF/255, green: 0x79/255, blue: 0xC6/255)
+        case .monokai: return Color(red: 0xF9/255, green: 0x26/255, blue: 0x72/255)
+        case .tokyoNight: return Color(red: 0x7A/255, green: 0xA2/255, blue: 0xF8/255)
+        case .catppuccin: return Color(red: 0x89/255, green: 0xB4/255, blue: 0xFA/255)
+        case .synthwave: return Color(red: 0xFF/255, green: 0x71/255, blue: 0xCE/255)
+        case .githubDark: return Color(red: 0x00/255, green: 0x5C/255, blue: 0xC5/255)
+        case .nord: return Color(red: 0x88/255, green: 0xC0/255, blue: 0xD0/255)
+        case .materialOcean: return Color(red: 0x82/255, green: 0xAA/255, blue: 0xFF/255)
+        case .gruvbox: return Color(red: 0x45/255, green: 0x85/255, blue: 0x88/255)
+        case .roseGarden: return Color(red: 0xD4/255, green: 0xB2/255, blue: 0xA7/255)
+        case .earthyOlive: return Color(red: 0xA6/255, green: 0xB3/255, blue: 0x74/255)
+        }
+    }
+    
+    var lightAccent: Color {
+        switch self {
+        case .dracula: return Color(red: 0xBD/255, green: 0x93/255, blue: 0xF9/255)
+        case .monokai: return Color(red: 0xFD/255, green: 0x97/255, blue: 0x1F/255)
+        case .tokyoNight: return Color(red: 0x9E/255, green: 0xCE/255, blue: 0x6A/255)
+        case .catppuccin: return Color(red: 0xF5/255, green: 0xC2/255, blue: 0xE7/255)
+        case .synthwave: return Color(red: 0xFF/255, green: 0xDA/255, blue: 0x00/255)
+        case .githubDark: return Color(red: 0x28/255, green: 0xA7/255, blue: 0x45/255)
+        case .nord: return Color(red: 0xBF/255, green: 0x61/255, blue: 0x6A/255)
+        case .materialOcean: return Color(red: 0xC7/255, green: 0x92/255, blue: 0xEA/255)
+        case .gruvbox: return Color(red: 0xCC/255, green: 0x24/255, blue: 0x1D/255)
+        case .roseGarden: return Color(red: 0xA3/255, green: 0x8F/255, blue: 0x85/255)
+        case .earthyOlive: return Color(red: 0x3A/255, green: 0x2D/255, blue: 0x28/255)
+        }
+    }
+    
+    var darkBackground: Color {
+        switch self {
+        case .dracula: return Color(red: 0x28/255, green: 0x2A/255, blue: 0x36/255)
+        case .monokai: return Color(red: 0x27/255, green: 0x28/255, blue: 0x22/255)
+        case .tokyoNight: return Color(red: 0x1A/255, green: 0x1B/255, blue: 0x26/255)
+        case .catppuccin: return Color(red: 0x1E/255, green: 0x1E/255, blue: 0x2E/255)
+        case .synthwave: return Color(red: 0x26/255, green: 0x21/255, blue: 0x35/255)
+        case .githubDark: return Color(red: 0x0D/255, green: 0x11/255, blue: 0x17/255)
+        case .nord: return Color(red: 0x2E/255, green: 0x34/255, blue: 0x40/255)
+        case .materialOcean: return Color(red: 0x0F/255, green: 0x11/255, blue: 0x18/255)
+        case .gruvbox: return Color(red: 0x28/255, green: 0x28/255, blue: 0x28/255)
+        case .roseGarden: return Color(red: 0x1A/255, green: 0x18/255, blue: 0x16/255)
+        case .earthyOlive: return Color(red: 0x1A/255, green: 0x18/255, blue: 0x16/255)
+        }
+    }
+    
+    var darkCodeBackground: Color {
+        switch self {
+        case .dracula: return Color(red: 0x21/255, green: 0x22/255, blue: 0x2C/255)
+        case .monokai: return Color(red: 0x1E/255, green: 0x1F/255, blue: 0x1C/255)
+        case .tokyoNight: return Color(red: 0x16/255, green: 0x17/255, blue: 0x21/255)
+        case .catppuccin: return Color(red: 0x18/255, green: 0x18/255, blue: 0x25/255)
+        case .synthwave: return Color(red: 0x1F/255, green: 0x1B/255, blue: 0x2D/255)
+        case .githubDark: return Color(red: 0x16/255, green: 0x1B/255, blue: 0x22/255)
+        case .nord: return Color(red: 0x3B/255, green: 0x42/255, blue: 0x52/255)
+        case .materialOcean: return Color(red: 0x17/255, green: 0x1C/255, blue: 0x28/255)
+        case .gruvbox: return Color(red: 0x1D/255, green: 0x20/255, blue: 0x21/255)
+        case .roseGarden: return Color(red: 0x2A/255, green: 0x28/255, blue: 0x26/255)
+        case .earthyOlive: return Color(red: 0x2A/255, green: 0x28/255, blue: 0x26/255)
+        }
+    }
+    
+    var darkLinkColor: Color {
+        switch self {
+        case .dracula: return Color(red: 0xFF/255, green: 0x79/255, blue: 0xC6/255)
+        case .monokai: return Color(red: 0xF9/255, green: 0x26/255, blue: 0x72/255)
+        case .tokyoNight: return Color(red: 0x7A/255, green: 0xA2/255, blue: 0xF8/255)
+        case .catppuccin: return Color(red: 0x89/255, green: 0xB4/255, blue: 0xFA/255)
+        case .synthwave: return Color(red: 0xFF/255, green: 0x71/255, blue: 0xCE/255)
+        case .githubDark: return Color(red: 0x58/255, green: 0xA6/255, blue: 0xFF/255)
+        case .nord: return Color(red: 0x88/255, green: 0xC0/255, blue: 0xD0/255)
+        case .materialOcean: return Color(red: 0x82/255, green: 0xAA/255, blue: 0xFF/255)
+        case .gruvbox: return Color(red: 0x83/255, green: 0xA5/255, blue: 0x98/255)
+        case .roseGarden: return Color(red: 0xE5/255, green: 0xC8/255, blue: 0xC0/255)
+        case .earthyOlive: return Color(red: 0xB8/255, green: 0xC8/255, blue: 0x94/255)
+        }
+    }
+    
+    var darkAccent: Color {
+        switch self {
+        case .dracula: return Color(red: 0xBD/255, green: 0x93/255, blue: 0xF9/255)
+        case .monokai: return Color(red: 0xFD/255, green: 0x97/255, blue: 0x1F/255)
+        case .tokyoNight: return Color(red: 0x9E/255, green: 0xCE/255, blue: 0x6A/255)
+        case .catppuccin: return Color(red: 0xF5/255, green: 0xC2/255, blue: 0xE7/255)
+        case .synthwave: return Color(red: 0xFF/255, green: 0xDA/255, blue: 0x00/255)
+        case .githubDark: return Color(red: 0x56/255, green: 0xD3/255, blue: 0x64/255)
+        case .nord: return Color(red: 0xBF/255, green: 0x61/255, blue: 0x6A/255)
+        case .materialOcean: return Color(red: 0xC7/255, green: 0x92/255, blue: 0xEA/255)
+        case .gruvbox: return Color(red: 0xFB/255, green: 0x49/255, blue: 0x34/255)
+        case .roseGarden: return Color(red: 0xC8/255, green: 0xB8/255, blue: 0xA8/255)
+        case .earthyOlive: return Color(red: 0xD8/255, green: 0xCE/255, blue: 0xC5/255)
+        }
+    }
+    
+    var previewColors: [Color] {
+        [lightBackground, lightCodeBackground, lightLinkColor, lightAccent]
+    }
+}
+
 struct SettingsView: View {
     @State private var storagePath: String
     @State private var showingFolderPicker = false
@@ -21,6 +171,7 @@ struct SettingsView: View {
     @State private var showingCreateDialog = false
     @State private var createDatabaseName: String = ""
     @State private var showingImportDialog = false
+    @AppStorage("appTheme") private var themeRawValue: String = AppTheme.earthyOlive.rawValue
     @Environment(\.dismiss) var dismiss
     
     var closeAction: (() -> Void)?
@@ -34,360 +185,15 @@ struct SettingsView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Header
-            HStack {
-                Text("Settings")
-                    .font(.title2)
-                    .bold()
-                Spacer()
-                Button("Done") {
-                    if let closeAction = closeAction {
-                        closeAction()
-                    } else {
-                        dismiss()
-                    }
-                }
-                .keyboardShortcut(.defaultAction)
-            }
-            .padding()
-            .background(Color(NSColor.windowBackgroundColor))
-            
+            settingsHeader
             Divider()
             
             ScrollView {
                 VStack(spacing: 20) {
-                    // Storage Settings
-                    GroupBox {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Label("Storage Location", systemImage: "folder")
-                                .font(.headline)
-                            
-                            Text("Database and images are stored here:")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            
-                            VStack(alignment: .leading, spacing: 8) {
-                                HStack {
-                                    Text(storagePath)
-                                        .font(.system(.body, design: .monospaced))
-                                        .foregroundColor(.primary)
-                                        .padding(8)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .background(Color(NSColor.textBackgroundColor))
-                                        .cornerRadius(4)
-                                }
-                                
-                                HStack(spacing: 12) {
-                                    Button("Change Location...") {
-                                        chooseFolderPath()
-                                    }
-                                    
-                                    Button("Open in Finder") {
-                                        NSWorkspace.shared.open(URL(fileURLWithPath: storagePath))
-                                    }
-                                    
-                                    Button("Reset to Default") {
-                                        resetToDefault()
-                                    }
-                                }
-                                .buttonStyle(.bordered)
-                            }
-                        }
-                        .padding(16)
-                    }
-                    .padding(.horizontal)
-                    
-                    // Database Management
-                    GroupBox {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Label("Databases", systemImage: "cylinder.split.1x2")
-                                .font(.headline)
-                            
-                            Text("Manage multiple journal databases")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            
-                            HStack(alignment: .top, spacing: 12) {
-                                // Database List
-                                VStack(spacing: 0) {
-                                    List {
-                                        ForEach(availableDatabases, id: \.self) { dbName in
-                                            Button(action: {
-                                                selectedDatabase = dbName
-                                                switchDatabase(to: dbName)
-                                            }) {
-                                                HStack {
-                                                    Image(systemName: dbName == selectedDatabase ? "cylinder.fill" : "cylinder")
-                                                        .foregroundColor(dbName == selectedDatabase ? .accentColor : .secondary)
-                                                        .font(.system(size: 14))
-                                                    
-                                                    VStack(alignment: .leading, spacing: 2) {
-                                                        Text(extractBaseName(from: dbName))
-                                                            .font(.system(size: 13))
-                                                        if let timestamp = extractTimestamp(from: dbName) {
-                                                            Text(timestamp)
-                                                                .font(.system(size: 10))
-                                                                .foregroundColor(.secondary)
-                                                        }
-                                                    }
-                                                    Spacer()
-                                                }
-                                            }
-                                            .buttonStyle(.plain)
-                                        }
-                                    }
-                                    .frame(height: 150)
-                                    .cornerRadius(6)
-                                }
-                                .frame(maxWidth: .infinity)
-                                
-                                // Add/Remove Buttons
-                                VStack(spacing: 8) {
-                                    Button(action: {
-                                        createDatabaseName = ""
-                                        showingCreateDialog = true
-                                    }) {
-                                        Image(systemName: "plus")
-                                            .frame(width: 20, height: 20)
-                                    }
-                                    .buttonStyle(.borderless)
-                                    .help("Create new database")
-                                    
-                                    Button(action: {
-                                        importDatabase()
-                                    }) {
-                                        Image(systemName: "square.and.arrow.down")
-                                            .frame(width: 20, height: 20)
-                                    }
-                                    .buttonStyle(.borderless)
-                                    .help("Import existing database")
-                                    
-                                    Button(action: {
-                                        if selectedDatabase != "journal.db" && !selectedDatabase.isEmpty {
-                                            databaseToDelete = selectedDatabase
-                                            showingDeleteConfirmation = true
-                                        }
-                                    }) {
-                                        Image(systemName: "minus")
-                                            .frame(width: 20, height: 20)
-                                    }
-                                    .buttonStyle(.borderless)
-                                    .disabled(selectedDatabase == "journal.db" || selectedDatabase.isEmpty)
-                                    .help("Delete selected database")
-                                    
-                                    Divider()
-                                        .frame(width: 20)
-                                    
-                                    Button(action: {
-                                        if !selectedDatabase.isEmpty {
-                                            databaseToRename = selectedDatabase
-                                            newDatabaseName = selectedDatabase.replacingOccurrences(of: ".db", with: "")
-                                            showingRenameDialog = true
-                                        }
-                                    }) {
-                                        Image(systemName: "pencil")
-                                            .frame(width: 20, height: 20)
-                                    }
-                                    .buttonStyle(.borderless)
-                                    .disabled(selectedDatabase.isEmpty)
-                                    .help("Rename selected database")
-                                }
-                                .padding(.top, 4)
-                            }
-                            
-                            Text("Currently active: \(selectedDatabase)")
-                                .font(.caption2)
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(16)
-                    }
-                    .padding(.horizontal)
-                    
-                    // Import & Export
-                    GroupBox {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Label("Import & Export", systemImage: "arrow.up.arrow.down.circle")
-                                .font(.headline)
-                            
-                            Text("Backup or restore your journal entries")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            
-                            VStack(spacing: 12) {
-                                // Export Section
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text("Export")
-                                        .font(.subheadline)
-                                        .fontWeight(.medium)
-                                    
-                                    HStack(spacing: 12) {
-                                        Button(action: exportToCSV) {
-                                            HStack {
-                                                Image(systemName: "doc.text")
-                                                Text("Export as CSV")
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                        }
-                                        .buttonStyle(.bordered)
-                                        
-                                        Button(action: exportToExcel) {
-                                            HStack {
-                                                Image(systemName: "tablecells")
-                                                Text("Export as Excel")
-                                            }
-                                            .frame(maxWidth: .infinity)
-                                        }
-                                        .buttonStyle(.bordered)
-                                    }
-                                }
-                                
-                                Divider()
-                                
-                                // Import Section
-                                VStack(alignment: .leading, spacing: 8) {
-                                    Text("Import")
-                                        .font(.subheadline)
-                                        .fontWeight(.medium)
-                                    
-                                    Button(action: importFromCSV) {
-                                        HStack {
-                                            Image(systemName: "square.and.arrow.down")
-                                            Text("Import from CSV")
-                                        }
-                                        .frame(maxWidth: .infinity)
-                                    }
-                                    .buttonStyle(.bordered)
-                                    .tint(.accentColor)
-                                    
-                                    Text("Import will merge entries. Existing entries with the same ID will be updated.")
-                                        .font(.caption2)
-                                        .foregroundColor(.secondary)
-                                        .fixedSize(horizontal: false, vertical: true)
-                                }
-                            }
-                        }
-                        .padding(16)
-                    }
-                    .padding(.horizontal)
-                    
-                    // Database Info
-                    GroupBox {
-                        VStack(alignment: .leading, spacing: 12) {
-                            Label("Database Information", systemImage: "cylinder")
-                                .font(.headline)
-                            
-                            VStack(spacing: 8) {
-                                InfoRow(label: "Type:", value: "SQLite")
-                                InfoRow(label: "Current DB:", value: selectedDatabase)
-                                InfoRow(label: "Images:", value: "images/")
-                                InfoRow(label: "Total DBs:", value: "\(availableDatabases.count)")
-                            }
-                            
-                            Divider()
-                                .padding(.vertical, 4)
-                            
-                            Text("All journal entries and images are stored locally on your Mac. No data is synced to the cloud.")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                        .padding(16)
-                    }
-                    .padding(.horizontal)
-                    
-                    // About & Feedback
-                    GroupBox {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Label("About", systemImage: "info.circle")
-                                .font(.headline)
-                            
-                            VStack(alignment: .leading, spacing: 12) {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("Author")
-                                        .font(.subheadline)
-                                        .fontWeight(.medium)
-                                    Text("Chakradhar Reddy Pakala")
-                                        .font(.body)
-                                }
-                                
-                                Divider()
-                                
-                                VStack(alignment: .leading, spacing: 8) {
-                                    HStack(spacing: 8) {
-                                        Image(systemName: "link.circle")
-                                            .foregroundColor(.secondary)
-                                            .frame(width: 20)
-                                        Button("github.com/chkry") {
-                                            if let url = URL(string: "https://github.com/chkry") {
-                                                NSWorkspace.shared.open(url)
-                                            }
-                                        }
-                                        .buttonStyle(.plain)
-                                        .foregroundColor(.accentColor)
-                                    }
-                                    
-                                    HStack(spacing: 8) {
-                                        Image(systemName: "link.circle")
-                                            .foregroundColor(.secondary)
-                                            .frame(width: 20)
-                                        Button("linkedin.com/in/chkry") {
-                                            if let url = URL(string: "https://linkedin.com/in/chkry") {
-                                                NSWorkspace.shared.open(url)
-                                            }
-                                        }
-                                        .buttonStyle(.plain)
-                                        .foregroundColor(.accentColor)
-                                    }
-                                    
-                                    HStack(spacing: 8) {
-                                        Image(systemName: "globe")
-                                            .foregroundColor(.secondary)
-                                            .frame(width: 20)
-                                        Button("www.chakrireddy.com") {
-                                            if let url = URL(string: "https://www.chakrireddy.com") {
-                                                NSWorkspace.shared.open(url)
-                                            }
-                                        }
-                                        .buttonStyle(.plain)
-                                        .foregroundColor(.accentColor)
-                                    }
-                                }
-                                
-                                Divider()
-                                
-                                VStack(alignment: .leading, spacing: 8) {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "envelope.circle.fill")
-                                            .foregroundColor(.accentColor)
-                                        Text("Feedback & Feature Requests")
-                                            .font(.subheadline)
-                                            .fontWeight(.medium)
-                                    }
-                                    
-                                    HStack(spacing: 8) {
-                                        Text("Send your suggestions to:")
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                        Button("ChakradharReddyPakala@gmail.com") {
-                                            if let url = URL(string: "mailto:ChakradharReddyPakala@gmail.com?subject=DigitalGram%20Feedback") {
-                                                NSWorkspace.shared.open(url)
-                                            }
-                                        }
-                                        .buttonStyle(.plain)
-                                        .foregroundColor(.accentColor)
-                                        .font(.caption)
-                                    }
-                                    
-                                    Text("Your feedback helps make DigitalGram better!")
-                                        .font(.caption2)
-                                        .foregroundColor(.secondary)
-                                        .italic()
-                                }
-                            }
-                        }
-                        .padding(16)
-                    }
-                    .padding(.horizontal)
+                    themeSection
+                    storageSection
+                    databaseSection
+                    exportImportSection
                 }
                 .padding(.vertical)
             }
@@ -406,62 +212,400 @@ struct SettingsView: View {
             .padding()
             .background(Color(NSColor.windowBackgroundColor))
         }
-        .frame(width: 600, height: 700)
+        .frame(minWidth: 600, minHeight: 400)
         .onAppear {
             loadAvailableDatabases()
-            
-            // Listen for database renames
-            NotificationCenter.default.addObserver(
-                forName: NSNotification.Name("DatabaseRenamed"),
-                object: nil,
-                queue: .main
-            ) { notification in
-                if let newName = notification.object as? String {
-                    self.selectedDatabase = newName
-                    self.loadAvailableDatabases()
+        }
+    }
+    
+    private var settingsHeader: some View {
+        HStack {
+            Text("Settings")
+                .font(.title2)
+                .bold()
+            Spacer()
+            Button("Done") {
+                if let closeAction = closeAction {
+                    closeAction()
+                } else {
+                    dismiss()
                 }
             }
+            .keyboardShortcut(.defaultAction)
         }
-        .alert("Database Migration", isPresented: $showingMigrationAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text(migrationMessage)
-        }
-        .alert("Import/Export", isPresented: $showingImportExportAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text(importExportMessage)
-        }
-        .alert("Database", isPresented: $showingDatabaseOperationAlert) {
-            Button("OK", role: .cancel) { }
-        } message: {
-            Text(databaseOperationMessage)
-        }
-        .alert("Delete Database", isPresented: $showingDeleteConfirmation) {
-            Button("Cancel", role: .cancel) { }
-            Button("Delete", role: .destructive) {
-                deleteDatabase(databaseToDelete)
+        .padding()
+        .background(Color(NSColor.windowBackgroundColor))
+    }
+    
+    private var themeSection: some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: 16) {
+                Label("Theme", systemImage: "paintpalette")
+                    .font(.headline)
+                
+                Text("Choose your color theme")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                ScrollView {
+                    VStack(spacing: 12) {
+                        ForEach(AppTheme.allCases, id: \.self) { theme in
+                            ThemeButton(theme: theme, isSelected: themeRawValue == theme.rawValue) {
+                                themeRawValue = theme.rawValue
+                            }
+                        }
+                    }
+                }
+                .frame(height: 280)
             }
-        } message: {
-            Text("Are you sure you want to delete '\(databaseToDelete)'?\n\nThis action cannot be undone. All journal entries in this database will be permanently deleted.")
+            .padding(16)
         }
-        .alert("Rename Database", isPresented: $showingRenameDialog) {
-            TextField("New name", text: $newDatabaseName)
-            Button("Cancel", role: .cancel) { }
-            Button("Rename") {
-                renameDatabase(from: databaseToRename, to: newDatabaseName)
+        .padding(.horizontal)
+    }
+    
+    private var storageSection: some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: 16) {
+                Label("Storage Location", systemImage: "folder")
+                    .font(.headline)
+                
+                Text("Database and images are stored here:")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text(storagePath)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(.primary)
+                            .padding(8)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .background(Color(NSColor.textBackgroundColor))
+                            .cornerRadius(4)
+                    }
+                    
+                    HStack(spacing: 12) {
+                        Button("Change Location...") {
+                            chooseFolderPath()
+                        }
+                        
+                        Button("Open in Finder") {
+                            NSWorkspace.shared.open(URL(fileURLWithPath: storagePath))
+                        }
+                        
+                        Button("Reset to Default") {
+                            resetToDefault()
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
             }
-        } message: {
-            Text("Enter a new name for '\(databaseToRename)'")
+            .padding(16)
         }
-        .alert("Create Database", isPresented: $showingCreateDialog) {
-            TextField("Database name", text: $createDatabaseName)
-            Button("Cancel", role: .cancel) { }
-            Button("Create") {
-                createNewDatabase(createDatabaseName)
+        .padding(.horizontal)
+    }
+    
+    private var databaseSection: some View {
+        GroupBox {
+            VStack(alignment: .leading, spacing: 16) {
+                Label("Databases", systemImage: "cylinder.split.1x2")
+                    .font(.headline)
+                
+                Text("Manage multiple journal databases")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                HStack(alignment: .top, spacing: 12) {
+                    // Database List
+                    VStack(spacing: 0) {
+                        List {
+                            ForEach(availableDatabases, id: \.self) { dbName in
+                                Button(action: {
+                                    selectedDatabase = dbName
+                                    switchDatabase(to: dbName)
+                                }) {
+                                    HStack {
+                                        Image(systemName: dbName == selectedDatabase ? "cylinder.fill" : "cylinder")
+                                            .foregroundColor(dbName == selectedDatabase ? .accentColor : .secondary)
+                                            .font(.system(size: 14))
+                                        
+                                        Text(dbName)
+                                            .font(.system(size: 13))
+                                        
+                                        Spacer()
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                        .frame(height: 150)
+                        .cornerRadius(6)
+                    }
+                    .frame(maxWidth: .infinity)
+                    
+                    // Add/Remove Buttons
+                    VStack(spacing: 8) {
+                        Button(action: {
+                            createDatabaseName = ""
+                            showingCreateDialog = true
+                        }) {
+                            Image(systemName: "plus")
+                                .frame(width: 20, height: 20)
+                        }
+                        .buttonStyle(.borderless)
+                        .help("Create new database")
+                        
+                        Button(action: {
+                            importDatabase()
+                        }) {
+                            Image(systemName: "square.and.arrow.down")
+                                .frame(width: 20, height: 20)
+                        }
+                        .buttonStyle(.borderless)
+                        .help("Import existing database")
+                        
+                        Button(action: {
+                            exportDatabase()
+                        }) {
+                            Image(systemName: "square.and.arrow.up")
+                                .frame(width: 20, height: 20)
+                        }
+                        .buttonStyle(.borderless)
+                        .disabled(selectedDatabase.isEmpty)
+                        .help("Export selected database")
+                        
+                        Divider()
+                            .frame(width: 20)
+                        
+                        Button(action: {
+                            if !selectedDatabase.isEmpty {
+                                databaseToDelete = selectedDatabase
+                                showingDeleteConfirmation = true
+                            }
+                        }) {
+                            Image(systemName: "minus")
+                                .frame(width: 20, height: 20)
+                        }
+                        .buttonStyle(.borderless)
+                        .disabled(selectedDatabase.isEmpty)
+                        .help("Delete selected database")
+                        
+                        Divider()
+                            .frame(width: 20)
+                        
+                        Button(action: {
+                            if !selectedDatabase.isEmpty {
+                                databaseToRename = selectedDatabase
+                                newDatabaseName = selectedDatabase.replacingOccurrences(of: ".db", with: "")
+                                showingRenameDialog = true
+                            }
+                        }) {
+                            Image(systemName: "pencil")
+                                .frame(width: 20, height: 20)
+                        }
+                        .buttonStyle(.borderless)
+                        .disabled(selectedDatabase.isEmpty)
+                        .help("Rename selected database")
+                    }
+                    .padding(.top, 4)
+                }
+                
+                Text("Currently active: \(selectedDatabase)")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
             }
-        } message: {
-            Text("Enter a name for the new database")
+            .padding(16)
+        }
+        .padding(.horizontal)
+    }
+    
+    private var exportImportSection: some View {
+        VStack(spacing: 20) {
+            // Import & Export
+            GroupBox {
+                VStack(alignment: .leading, spacing: 16) {
+                    Label("Import & Export", systemImage: "arrow.up.arrow.down.circle")
+                        .font(.headline)
+                    
+                    Text("Backup or restore your journal entries")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    
+                    VStack(spacing: 12) {
+                        // Export Section
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Export")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            
+                            HStack(spacing: 12) {
+                                Button(action: exportToCSV) {
+                                    HStack {
+                                        Image(systemName: "doc.text")
+                                        Text("Export as CSV")
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
+                                .buttonStyle(.bordered)
+                                
+                                Button(action: exportToExcel) {
+                                    HStack {
+                                        Image(systemName: "tablecells")
+                                        Text("Export as Excel")
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
+                                .buttonStyle(.bordered)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                        // Import Section
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Import")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            
+                            Button(action: importFromCSV) {
+                                HStack {
+                                    Image(systemName: "square.and.arrow.down")
+                                    Text("Import from CSV")
+                                }
+                                .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(.bordered)
+                            .tint(.accentColor)
+                            
+                            Text("Import will merge entries. Existing entries with the same ID will be updated.")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                }
+                .padding(16)
+            }
+            .padding(.horizontal)
+            
+            // Database Info
+            GroupBox {
+                VStack(alignment: .leading, spacing: 12) {
+                    Label("Database Information", systemImage: "cylinder")
+                        .font(.headline)
+                    
+                    VStack(spacing: 8) {
+                        InfoRow(label: "Type:", value: "SQLite")
+                        InfoRow(label: "Current DB:", value: selectedDatabase)
+                        InfoRow(label: "Images:", value: "images/")
+                        InfoRow(label: "Total DBs:", value: "\(availableDatabases.count)")
+                    }
+                    
+                    Divider()
+                        .padding(.vertical, 4)
+                    
+                    Text("All journal entries and images are stored locally on your Mac. No data is synced to the cloud.")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(16)
+            }
+            .padding(.horizontal)
+            
+            // About & Feedback
+            GroupBox {
+                VStack(alignment: .leading, spacing: 16) {
+                    Label("About", systemImage: "info.circle")
+                        .font(.headline)
+                    
+                    VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Author")
+                                .font(.subheadline)
+                                .fontWeight(.medium)
+                            Text("Chakradhar Reddy Pakala")
+                                .font(.body)
+                        }
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "link.circle")
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 20)
+                                Button("github.com/chkry") {
+                                    if let url = URL(string: "https://github.com/chkry") {
+                                        NSWorkspace.shared.open(url)
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                                .foregroundColor(.accentColor)
+                            }
+                            
+                            HStack(spacing: 8) {
+                                Image(systemName: "link.circle")
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 20)
+                                Button("linkedin.com/in/chkry") {
+                                    if let url = URL(string: "https://linkedin.com/in/chkry") {
+                                        NSWorkspace.shared.open(url)
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                                .foregroundColor(.accentColor)
+                            }
+                            
+                            HStack(spacing: 8) {
+                                Image(systemName: "globe")
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 20)
+                                Button("www.chakrireddy.com") {
+                                    if let url = URL(string: "https://www.chakrireddy.com") {
+                                        NSWorkspace.shared.open(url)
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                                .foregroundColor(.accentColor)
+                            }
+                        }
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 4) {
+                                Image(systemName: "envelope.circle.fill")
+                                    .foregroundColor(.accentColor)
+                                Text("Feedback & Feature Requests")
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+                            }
+                            
+                            HStack(spacing: 8) {
+                                Text("Send your suggestions to:")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                Button("ChakradharReddyPakala@gmail.com") {
+                                    if let url = URL(string: "mailto:ChakradharReddyPakala@gmail.com?subject=DigitalGram%20Feedback") {
+                                        NSWorkspace.shared.open(url)
+                                    }
+                                }
+                                .buttonStyle(.plain)
+                                .foregroundColor(.accentColor)
+                                .font(.caption)
+                            }
+                            
+                            Text("Your feedback helps make DigitalGram better!")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                                .italic()
+                        }
+                    }
+                }
+                .padding(16)
+            }
+            .padding(.horizontal)
         }
     }
     
@@ -481,6 +625,7 @@ struct SettingsView: View {
             }
         } else {
             // Fallback to runModal if no window available
+            NSApp.activate(ignoringOtherApps: true)
             let response = panel.runModal()
             handleFolderSelection(panel: panel, response: response)
         }
@@ -616,6 +761,7 @@ struct SettingsView: View {
                 self.handleCSVExport(savePanel: savePanel, response: response, entries: entries)
             }
         } else {
+            NSApp.activate(ignoringOtherApps: true)
             let response = savePanel.runModal()
             handleCSVExport(savePanel: savePanel, response: response, entries: entries)
         }
@@ -657,6 +803,7 @@ struct SettingsView: View {
                 self.handleExcelExport(savePanel: savePanel, response: response, entries: entries)
             }
         } else {
+            NSApp.activate(ignoringOtherApps: true)
             let response = savePanel.runModal()
             handleExcelExport(savePanel: savePanel, response: response, entries: entries)
         }
@@ -692,6 +839,7 @@ struct SettingsView: View {
                 self.handleCSVImport(openPanel: openPanel, response: response)
             }
         } else {
+            NSApp.activate(ignoringOtherApps: true)
             let response = openPanel.runModal()
             handleCSVImport(openPanel: openPanel, response: response)
         }
@@ -887,57 +1035,14 @@ struct SettingsView: View {
         NotificationCenter.default.post(name: NSNotification.Name("DatabaseChanged"), object: nil)
     }
     
-    private func generateTimestampedName(baseName: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
-        let timestamp = dateFormatter.string(from: Date())
-        
+    private func sanitizeDatabaseName(_ name: String) -> String {
         // Remove .db extension if present
-        let nameWithoutExtension = baseName.hasSuffix(".db") ? String(baseName.dropLast(3)) : baseName
+        let nameWithoutExtension = name.hasSuffix(".db") ? String(name.dropLast(3)) : name
         
-        return "\(nameWithoutExtension)_\(timestamp).db"
+        // Return with .db extension
+        return "\(nameWithoutExtension).db"
     }
-    
-    private func extractBaseName(from fileName: String) -> String {
-        // Remove .db extension
-        let nameWithoutExtension = fileName.hasSuffix(".db") ? String(fileName.dropLast(3)) : fileName
-        
-        // Remove timestamp pattern _YYYY-MM-DD_HH-MM-SS if present
-        let pattern = "_\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}$"
-        if let regex = try? NSRegularExpression(pattern: pattern),
-           let match = regex.firstMatch(in: nameWithoutExtension, range: NSRange(nameWithoutExtension.startIndex..., in: nameWithoutExtension)) {
-            let range = Range(match.range, in: nameWithoutExtension)
-            if let range = range {
-                return String(nameWithoutExtension[..<range.lowerBound])
-            }
-        }
-        
-        return nameWithoutExtension
-    }
-    
-    private func extractTimestamp(from fileName: String) -> String? {
-        let nameWithoutExtension = fileName.hasSuffix(".db") ? String(fileName.dropLast(3)) : fileName
-        let pattern = "_(\\d{4})-(\\d{2})-(\\d{2})_(\\d{2})-(\\d{2})-(\\d{2})$"
-        
-        if let regex = try? NSRegularExpression(pattern: pattern),
-           let match = regex.firstMatch(in: nameWithoutExtension, range: NSRange(nameWithoutExtension.startIndex..., in: nameWithoutExtension)) {
-            let range = Range(match.range, in: nameWithoutExtension)
-            if let range = range {
-                let timestampStr = String(nameWithoutExtension[range])
-                // Format: _YYYY-MM-DD_HH-MM-SS -> "Updated: DD/MM/YYYY HH:MM"
-                let components = timestampStr.dropFirst().split(separator: "_")
-                if components.count == 2 {
-                    let dateParts = components[0].split(separator: "-")
-                    let timeParts = components[1].split(separator: "-")
-                    if dateParts.count == 3 && timeParts.count == 3 {
-                        return "Updated: \(dateParts[2])/\(dateParts[1])/\(dateParts[0]) \(timeParts[0]):\(timeParts[1])"
-                    }
-                }
-            }
-        }
-        
-        return nil
-    }
+
     
     private func createNewDatabase(_ name: String) {
         let baseName = name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -947,8 +1052,8 @@ struct SettingsView: View {
             return
         }
         
-        // Generate timestamped filename
-        let dbName = generateTimestampedName(baseName: baseName)
+        // Use sanitized name without timestamp
+        let dbName = sanitizeDatabaseName(baseName)
         
         // Check if already exists
         if availableDatabases.contains(dbName) {
@@ -1020,16 +1125,45 @@ struct SettingsView: View {
         }
     }
     
+    private func exportDatabase() {
+        guard !selectedDatabase.isEmpty else { return }
+        
+        let panel = NSSavePanel()
+        panel.canCreateDirectories = true
+        panel.message = "Export '\(selectedDatabase)' to a new location"
+        panel.prompt = "Export"
+        panel.nameFieldStringValue = selectedDatabase
+        
+        // Filter for .db files
+        if #available(macOS 11.0, *) {
+            if let dbType = UTType(filenameExtension: "db") {
+                panel.allowedContentTypes = [dbType]
+            }
+        } else {
+            panel.allowedFileTypes = ["db"]
+        }
+        
+        // Ensure panel appears on top
+        if let window = NSApp.keyWindow {
+            panel.beginSheetModal(for: window) { response in
+                self.handleDatabaseExport(panel: panel, response: response)
+            }
+        } else {
+            // Activate app to bring window to front
+            NSApp.activate(ignoringOtherApps: true)
+            let response = panel.runModal()
+            handleDatabaseExport(panel: panel, response: response)
+        }
+    }
+    
     private func handleDatabaseImport(panel: NSOpenPanel, response: NSApplication.ModalResponse) {
         guard response == .OK, let sourceURL = panel.url else { return }
         
         let fileManager = FileManager.default
         let storageURL = URL(fileURLWithPath: storagePath)
         
-        // Get base name from original file and add timestamp
-        let originalFileName = sourceURL.lastPathComponent
-        let baseName = extractBaseName(from: originalFileName)
-        let fileName = generateTimestampedName(baseName: baseName)
+        // Use the original filename without adding timestamp
+        let fileName = sourceURL.lastPathComponent
         let destinationURL = storageURL.appendingPathComponent(fileName)
         
         do {
@@ -1056,26 +1190,57 @@ struct SettingsView: View {
         }
     }
     
-    private func deleteDatabase(_ dbName: String) {
-        if dbName == "journal.db" {
-            databaseOperationMessage = "Cannot delete the default database."
-            showingDatabaseOperationAlert = true
-            return
-        }
+    private func handleDatabaseExport(panel: NSSavePanel, response: NSApplication.ModalResponse) {
+        guard response == .OK, let destinationURL = panel.url else { return }
         
+        let fileManager = FileManager.default
+        let storageURL = URL(fileURLWithPath: storagePath)
+        let sourceURL = storageURL.appendingPathComponent(selectedDatabase)
+        
+        do {
+            // Start accessing security-scoped resource for destination
+            let destAccess = destinationURL.startAccessingSecurityScopedResource()
+            defer {
+                if destAccess {
+                    destinationURL.stopAccessingSecurityScopedResource()
+                }
+            }
+            
+            // Remove existing file if it exists
+            if fileManager.fileExists(atPath: destinationURL.path) {
+                try fileManager.removeItem(at: destinationURL)
+            }
+            
+            // Copy the database file to selected location
+            try fileManager.copyItem(at: sourceURL, to: destinationURL)
+            
+            databaseOperationMessage = "Database '\(selectedDatabase)' exported successfully to:\n\(destinationURL.path)"
+            showingDatabaseOperationAlert = true
+            
+        } catch {
+            databaseOperationMessage = "Failed to export database: \(error.localizedDescription)"
+            showingDatabaseOperationAlert = true
+        }
+    }
+    
+    private func deleteDatabase(_ dbName: String) {
         let storageURL = URL(fileURLWithPath: storagePath)
         let dbPath = storageURL.appendingPathComponent(dbName)
         
         do {
             try FileManager.default.removeItem(at: dbPath)
             
-            // Switch to journal.db if we deleted the current database
-            if selectedDatabase == dbName {
+            loadAvailableDatabases()
+            
+            // If we deleted the current database or all databases, switch to journal.db
+            if selectedDatabase == dbName || availableDatabases.isEmpty {
+                // Create journal.db if it doesn't exist
+                if !availableDatabases.contains("journal.db") {
+                    createNewDatabase("journal")
+                }
                 selectedDatabase = "journal.db"
                 switchDatabase(to: "journal.db")
             }
-            
-            loadAvailableDatabases()
             
             databaseOperationMessage = "Database '\(dbName)' deleted successfully."
             showingDatabaseOperationAlert = true
@@ -1144,6 +1309,46 @@ struct InfoRow: View {
                 .font(.system(.body, design: .monospaced))
             Spacer()
         }
+    }
+}
+
+struct ThemeButton: View {
+    let theme: AppTheme
+    let isSelected: Bool
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                HStack(spacing: 4) {
+                    ForEach(0..<4, id: \.self) { index in
+                        RoundedRectangle(cornerRadius: 4)
+                            .fill(theme.previewColors[index])
+                            .frame(width: 24, height: 24)
+                    }
+                }
+                
+                Text(theme.displayName)
+                    .font(.body)
+                
+                Spacer()
+                
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.accentColor)
+                }
+            }
+            .padding(12)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(isSelected ? Color.accentColor.opacity(0.1) : Color.clear)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(isSelected ? Color.accentColor : Color.gray.opacity(0.3), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
     }
 }
 

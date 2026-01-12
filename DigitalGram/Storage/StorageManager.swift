@@ -174,7 +174,6 @@ class StorageManager {
                 #if DEBUG
                 print("Entry saved successfully")
                 #endif
-                updateDatabaseTimestamp()
             } else {
                 #if DEBUG
                 let errorMessage = String(cString: sqlite3_errmsg(db)!)
@@ -223,7 +222,6 @@ class StorageManager {
                 #if DEBUG
                 print("Entry deleted successfully")
                 #endif
-                updateDatabaseTimestamp()
             }
         }
         
@@ -234,67 +232,6 @@ class StorageManager {
         return databasePath
     }
     
-    private func updateDatabaseTimestamp() {
-        let currentDB = AppSettings.shared.currentDatabase
-        
-        // Don't update default database name
-        if currentDB == "journal.db" {
-            return
-        }
-        
-        let settings = AppSettings.shared
-        let storageDir = bookmarkedURL ?? URL(fileURLWithPath: settings.storagePath)
-        let currentPath = storageDir.appendingPathComponent(currentDB)
-        
-        // Extract base name (remove old timestamp)
-        let baseName = extractBaseName(from: currentDB)
-        let newName = generateTimestampedName(baseName: baseName)
-        let newPath = storageDir.appendingPathComponent(newName)
-        
-        // Close current database
-        closeDatabase()
-        
-        // Rename file
-        do {
-            try fileManager.moveItem(at: currentPath, to: newPath)
-            
-            // Update settings
-            AppSettings.shared.currentDatabase = newName
-            AppSettings.shared.save()
-            
-            // Reopen database
-            openDatabase()
-            
-            // Notify about database name change
-            NotificationCenter.default.post(name: NSNotification.Name("DatabaseRenamed"), object: newName)
-        } catch {
-            #if DEBUG
-            print("Failed to update database timestamp: \(error)")
-            #endif
-            // Reopen database even if rename failed
-            openDatabase()
-        }
-    }
-    
-    private func extractBaseName(from fileName: String) -> String {
-        let nameWithoutExtension = fileName.hasSuffix(".db") ? String(fileName.dropLast(3)) : fileName
-        let pattern = "_\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}$"
-        if let regex = try? NSRegularExpression(pattern: pattern),
-           let match = regex.firstMatch(in: nameWithoutExtension, range: NSRange(nameWithoutExtension.startIndex..., in: nameWithoutExtension)) {
-            let range = Range(match.range, in: nameWithoutExtension)
-            if let range = range {
-                return String(nameWithoutExtension[..<range.lowerBound])
-            }
-        }
-        return nameWithoutExtension
-    }
-    
-    private func generateTimestampedName(baseName: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd_HH-mm-ss"
-        let timestamp = dateFormatter.string(from: Date())
-        return "\(baseName)_\(timestamp).db"
-    }
     
     deinit {
         closeDatabase()

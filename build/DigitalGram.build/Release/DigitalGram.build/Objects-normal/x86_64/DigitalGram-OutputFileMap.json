@@ -1,0 +1,56 @@
+{
+  "" : {
+    "const-values" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary.swiftconstvalues",
+    "dependencies" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary.d",
+    "diagnostics" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary.dia",
+    "emit-module-dependencies" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary-emit-module.dia",
+    "pch" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary.swiftdeps"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/AppDelegate.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/AppDelegate.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/AppDelegate.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/AppDelegate.o"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/DigitalGramApp.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGramApp.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGramApp.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGramApp.o"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/Models/AppSettings.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/AppSettings.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/AppSettings.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/AppSettings.o"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/Models/JournalEntry.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalEntry.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalEntry.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalEntry.o"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/Storage/StorageManager.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/StorageManager.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/StorageManager.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/StorageManager.o"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/ViewModels/JournalViewModel.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalViewModel.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalViewModel.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalViewModel.o"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/Views/JournalEntryView.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalEntryView.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalEntryView.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/JournalEntryView.o"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/Views/SettingsView.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/SettingsView.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/SettingsView.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/SettingsView.o"
+  },
+  "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/GeneratedAssetSymbols.o"
+  }
+}

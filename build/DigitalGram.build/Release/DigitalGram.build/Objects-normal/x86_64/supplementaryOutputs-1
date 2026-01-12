@@ -1,0 +1,12 @@
+{
+  "/Users/chkry/Documents/CODE/DigitalGram/DigitalGram/DigitalGramApp.swift" : {
+    "abi-baseline-json" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram.abi.json",
+    "const-values" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary.swiftconstvalues",
+    "dependencies" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary.d",
+    "diagnostics" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-primary.dia",
+    "objc-header" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram-Swift.h",
+    "swiftdoc" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram.swiftdoc",
+    "swiftmodule" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram.swiftmodule",
+    "swiftsourceinfo" : "/Users/chkry/Documents/CODE/DigitalGram/build/DigitalGram.build/Release/DigitalGram.build/Objects-normal/x86_64/DigitalGram.swiftsourceinfo"
+  }
+}

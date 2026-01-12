@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 struct JournalEntryView: View {
     @StateObject private var viewModel = JournalViewModel()
@@ -11,6 +12,8 @@ struct JournalEntryView: View {
     @State private var showingDatePicker = false
     @State private var selectedTab = 0 // 0 = Journal, 1 = Entries
     @AppStorage("isDarkMode") private var isDarkMode: Bool = false
+    @State private var cursorPosition: Int = 0
+    @State private var selectionRange: NSRange = NSRange(location: 0, length: 0)
     
     var body: some View {
         VStack(spacing: 0) {
@@ -136,6 +139,15 @@ struct JournalEntryView: View {
                 .help("Italic")
                 .disabled(showPreview)
                 
+                Button(action: { insertMarkdown("`code`") }) {
+                    Text("<>")
+                        .font(.system(size: 12, design: .monospaced))
+                        .frame(minWidth: 20)
+                }
+                .buttonStyle(.plain)
+                .help("Inline code")
+                .disabled(showPreview)
+                
                 Button(action: { insertMarkdown("# ") }) {
                     Text("H1")
                         .font(.system(size: 12, weight: .bold))
@@ -226,12 +238,15 @@ struct JournalEntryView: View {
             } else if showPreview {
                 // Markdown Preview
                 ScrollView {
-                    InteractiveMarkdownPreview(markdown: $markdownText, onSave: autoSave)
+                    InteractiveMarkdownPreview(markdown: $markdownText, onSave: autoSave, onDoubleTap: {
+                        showPreview = false
+                    })
                         .padding()
                 }
+                .background(Color(NSColor.textBackgroundColor))
             } else {
                 // Markdown Editor
-                TextEditor(text: $markdownText)
+                MarkdownTextEditor(text: $markdownText, cursorPosition: $cursorPosition, selectionRange: $selectionRange)
                     .font(.system(.body, design: .default))
                     .padding(8)
                     .onChange(of: markdownText) { newValue in
@@ -297,17 +312,23 @@ struct JournalEntryView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         let timeString = formatter.string(from: Date())
-        markdownText += timeString
+        let index = markdownText.index(markdownText.startIndex, offsetBy: min(cursorPosition, markdownText.count))
+        markdownText.insert(contentsOf: timeString, at: index)
+        cursorPosition += timeString.count
     }
     
     private func loadEntryForDate(_ date: Date) {
         if let entry = viewModel.getEntryForDate(date) {
             markdownText = entry.markdownContent
             currentEntryId = entry.id
+            // Start in preview mode if entry exists and has content
+            showPreview = !entry.markdownContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         } else {
             // Create new entry for selected date
             currentEntryId = UUID().uuidString
             markdownText = ""
+            // Start in editor mode for new entries
+            showPreview = false
         }
     }
     
@@ -319,7 +340,37 @@ struct JournalEntryView: View {
     }
     
     private func insertMarkdown(_ syntax: String) {
-        markdownText += syntax
+        // Check if there's a selection
+        if selectionRange.length > 0 {
+            // Wrap selected text with markdown syntax
+            let startIndex = markdownText.index(markdownText.startIndex, offsetBy: selectionRange.location)
+            let endIndex = markdownText.index(startIndex, offsetBy: selectionRange.length)
+            let selectedText = String(markdownText[startIndex..<endIndex])
+            
+            // Determine wrapping syntax based on the syntax type
+            var wrappedText: String
+            if syntax == "**bold**" {
+                wrappedText = "**\(selectedText)**"
+            } else if syntax == "*italic*" {
+                wrappedText = "*\(selectedText)*"
+            } else if syntax == "`code`" {
+                wrappedText = "`\(selectedText)`"
+            } else if syntax == "[link text](url)" {
+                wrappedText = "[\(selectedText)](url)"
+            } else {
+                // For other syntax, just insert before selection
+                wrappedText = syntax + selectedText
+            }
+            
+            markdownText.replaceSubrange(startIndex..<endIndex, with: wrappedText)
+            cursorPosition = selectionRange.location + wrappedText.count
+            selectionRange = NSRange(location: cursorPosition, length: 0)
+        } else {
+            // No selection, insert at cursor position
+            let index = markdownText.index(markdownText.startIndex, offsetBy: min(cursorPosition, markdownText.count))
+            markdownText.insert(contentsOf: syntax, at: index)
+            cursorPosition += syntax.count
+        }
     }
     
     private func insertImage() {
@@ -351,6 +402,7 @@ struct JournalEntryView: View {
     }
     
     private func runImagePanel(_ panel: NSOpenPanel) {
+        NSApp.activate(ignoringOtherApps: true)
         let response = panel.runModal()
         handleImageSelection(panel: panel, response: response)
     }
@@ -386,10 +438,13 @@ struct JournalEntryView: View {
             // Copy the image
             try FileManager.default.copyItem(at: sourceURL, to: destinationURL)
             
-            // Insert markdown
+            // Insert markdown at cursor position
             let relativePath = "./images/\(imageName)"
             let altText = sourceURL.deletingPathExtension().lastPathComponent
-            markdownText += "![\(altText)](\(relativePath))\n"
+            let imageMarkdown = "![\(altText)](\(relativePath))\n"
+            let index = markdownText.index(markdownText.startIndex, offsetBy: min(cursorPosition, markdownText.count))
+            markdownText.insert(contentsOf: imageMarkdown, at: index)
+            cursorPosition += imageMarkdown.count
             
             print("Image copied successfully to: \(destinationURL.path)")
         } catch {
@@ -429,7 +484,30 @@ struct JournalEntryView: View {
 struct InteractiveMarkdownPreview: View {
     @Binding var markdown: String
     let onSave: () -> Void
+    var onDoubleTap: () -> Void
     @State private var imageScale: CGFloat = 1.0
+    @Environment(\.colorScheme) var colorScheme
+    @AppStorage("appTheme") private var themeRawValue: String = AppTheme.earthyOlive.rawValue
+    
+    private var theme: AppTheme {
+        AppTheme(rawValue: themeRawValue) ?? .earthyOlive
+    }
+    
+    var linkColor: Color {
+        colorScheme == .dark ? theme.darkLinkColor : theme.lightLinkColor
+    }
+    
+    var codeBackgroundColor: Color {
+        colorScheme == .dark ? theme.darkCodeBackground : theme.lightCodeBackground
+    }
+    
+    var backgroundColor: Color {
+        colorScheme == .dark ? theme.darkBackground : theme.lightBackground
+    }
+    
+    var accentColor: Color {
+        colorScheme == .dark ? theme.darkAccent : theme.lightAccent
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -438,6 +516,10 @@ struct InteractiveMarkdownPreview: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
+        .onTapGesture(count: 2) {
+            onDoubleTap()
+        }
     }
     
     private func parseMarkdownBlocks(_ text: String) -> [MarkdownBlock] {
@@ -488,7 +570,7 @@ struct InteractiveMarkdownPreview: View {
                             .foregroundColor(.secondary)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
-                            .background(Color(NSColor.controlBackgroundColor))
+                            .background(codeBackgroundColor.opacity(0.7))
                             .cornerRadius(4, corners: [.topLeft, .topRight])
                     }
                     
@@ -496,7 +578,7 @@ struct InteractiveMarkdownPreview: View {
                         .font(.system(.body, design: .monospaced))
                         .padding(8)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color(NSColor.controlBackgroundColor))
+                        .background(codeBackgroundColor)
                         .cornerRadius(language.isEmpty ? 4 : 0, corners: language.isEmpty ? [.allCorners] : [.bottomLeft, .bottomRight])
                 }
             }
@@ -523,7 +605,7 @@ struct InteractiveMarkdownPreview: View {
                         toggleCheckbox(at: index, checked: false)
                     }) {
                         Image(systemName: "square")
-                            .foregroundColor(.blue)
+                            .foregroundColor(linkColor)
                     }
                     .buttonStyle(.plain)
                     Text(formatInlineMarkdown(String(line.dropFirst(6))))
@@ -534,7 +616,7 @@ struct InteractiveMarkdownPreview: View {
                         toggleCheckbox(at: index, checked: true)
                     }) {
                         Image(systemName: "checkmark.square.fill")
-                            .foregroundColor(.blue)
+                            .foregroundColor(linkColor)
                     }
                     .buttonStyle(.plain)
                     Text(formatInlineMarkdown(String(line.dropFirst(6))))
@@ -646,7 +728,7 @@ struct InteractiveMarkdownPreview: View {
                             NSWorkspace.shared.open(url)
                         }) {
                             Text(linkText)
-                                .foregroundColor(.blue)
+                                .foregroundColor(linkColor)
                                 .underline()
                         }
                         .buttonStyle(.plain)
@@ -731,7 +813,7 @@ struct InteractiveMarkdownPreview: View {
                     
                     let newEndIndex = result.index(startIndex, offsetByCharacters: content.count)
                     result[startIndex..<newEndIndex].font = .system(.body, design: .monospaced)
-                    result[startIndex..<newEndIndex].backgroundColor = Color(NSColor.controlBackgroundColor)
+                    result[startIndex..<newEndIndex].backgroundColor = codeBackgroundColor.opacity(0.5)
                 }
             }
         }
@@ -1169,6 +1251,126 @@ struct UIRectCorner: OptionSet {
     static let topRight = UIRectCorner(rawValue: 1 << 1)
     static let bottomLeft = UIRectCorner(rawValue: 1 << 2)
     static let bottomRight = UIRectCorner(rawValue: 1 << 3)
+}
+
+// Custom NSTextView wrapper to track cursor position and selection
+struct MarkdownTextEditor: NSViewRepresentable {
+    @Binding var text: String
+    @Binding var cursorPosition: Int
+    @Binding var selectionRange: NSRange
+    
+    func makeNSView(context: Context) -> NSScrollView {
+        let scrollView = NSTextView.scrollableTextView()
+        let textView = scrollView.documentView as! NSTextView
+        
+        textView.delegate = context.coordinator
+        textView.isRichText = false
+        textView.autoresizingMask = [.width]
+        textView.font = .systemFont(ofSize: NSFont.systemFontSize)
+        textView.textColor = NSColor.textColor
+        textView.backgroundColor = NSColor.textBackgroundColor
+        textView.string = text
+        textView.isAutomaticQuoteSubstitutionEnabled = false
+        textView.isAutomaticDashSubstitutionEnabled = false
+        textView.isAutomaticTextReplacementEnabled = false
+        
+        return scrollView
+    }
+    
+    func updateNSView(_ scrollView: NSScrollView, context: Context) {
+        let textView = scrollView.documentView as! NSTextView
+        
+        if textView.string != text {
+            let selectedRange = textView.selectedRange()
+            textView.string = text
+            
+            // Restore cursor position
+            if cursorPosition <= text.count {
+                textView.setSelectedRange(NSRange(location: cursorPosition, length: 0))
+            } else {
+                textView.setSelectedRange(selectedRange)
+            }
+        }
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, NSTextViewDelegate {
+        var parent: MarkdownTextEditor
+        
+        init(_ parent: MarkdownTextEditor) {
+            self.parent = parent
+        }
+        
+        func textDidChange(_ notification: Notification) {
+            guard let textView = notification.object as? NSTextView else { return }
+            parent.text = textView.string
+            let range = textView.selectedRange()
+            parent.cursorPosition = range.location
+            parent.selectionRange = range
+        }
+        
+        func textViewDidChangeSelection(_ notification: Notification) {
+            guard let textView = notification.object as? NSTextView else { return }
+            let range = textView.selectedRange()
+            parent.cursorPosition = range.location
+            parent.selectionRange = range
+        }
+        
+        func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+            // Handle Enter key for auto-continuing lists and checkboxes
+            if commandSelector == #selector(NSResponder.insertNewline(_:)) {
+                return handleNewline(textView)
+            }
+            return false
+        }
+        
+        private func handleNewline(_ textView: NSTextView) -> Bool {
+            let text = textView.string as NSString
+            let cursorLocation = textView.selectedRange().location
+            
+            // Find the current line using NSString methods
+            let lineRange = text.lineRange(for: NSRange(location: cursorLocation, length: 0))
+            let currentLine = text.substring(with: lineRange).trimmingCharacters(in: .newlines)
+            
+            // Check for checkbox patterns
+            if currentLine.hasPrefix("- [ ] ") {
+                let restOfLine = currentLine.dropFirst(6)
+                if restOfLine.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty {
+                    // Empty checkbox, remove it and just add newline
+                    textView.insertText("", replacementRange: NSRange(location: lineRange.location, length: lineRange.length - 1))
+                } else {
+                    // Add new checkbox
+                    textView.insertText("\n- [ ] ", replacementRange: textView.selectedRange())
+                }
+                return true
+            } else if currentLine.hasPrefix("- [x] ") || currentLine.hasPrefix("- [X] ") {
+                let restOfLine = currentLine.dropFirst(6)
+                if restOfLine.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty {
+                    // Empty checked checkbox, remove it and just add newline
+                    textView.insertText("", replacementRange: NSRange(location: lineRange.location, length: lineRange.length - 1))
+                } else {
+                    // Add new unchecked checkbox
+                    textView.insertText("\n- [ ] ", replacementRange: textView.selectedRange())
+                }
+                return true
+            } else if currentLine.hasPrefix("- ") {
+                let restOfLine = currentLine.dropFirst(2)
+                if restOfLine.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty {
+                    // Empty list item, remove it and just add newline
+                    textView.insertText("", replacementRange: NSRange(location: lineRange.location, length: lineRange.length - 1))
+                } else {
+                    // Add new list item
+                    textView.insertText("\n- ", replacementRange: textView.selectedRange())
+                }
+                return true
+            }
+            
+            return false
+        }
+    }
 }
 
 #Preview {
