@@ -6,7 +6,7 @@
 set -e
 
 APP_NAME="DigitalGram"
-VERSION="1.1"
+VERSION="1.2.0"
 DMG_NAME="${APP_NAME}-${VERSION}"
 BUILD_DIR="build/Release"
 DMG_DIR="dmg_temp"

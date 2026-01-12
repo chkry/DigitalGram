@@ -6,7 +6,7 @@
 	<integer>12</integer>
 	<key>logs</key>
 	<dict>
-		<key>129E99B5-CF25-49F7-8285-1D8A194B2206</key>
+		<key>B48992B8-AA50-475C-A949-31E66C39A188</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>129E99B5-CF25-49F7-8285-1D8A194B2206.xcactivitylog</string>
+			<string>B48992B8-AA50-475C-A949-31E66C39A188.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -40,15 +40,15 @@
 			<key>signature</key>
 			<string>Cleaning project DigitalGram with scheme DigitalGram and configuration Release</string>
 			<key>timeStartedRecording</key>
-			<real>789919851.73592901</real>
+			<real>789921706.64953494</real>
 			<key>timeStoppedRecording</key>
-			<real>789919852.047701</real>
+			<real>789921707.07211304</real>
 			<key>title</key>
 			<string>Cleaning project DigitalGram with scheme DigitalGram and configuration Release</string>
 			<key>uniqueIdentifier</key>
-			<string>129E99B5-CF25-49F7-8285-1D8A194B2206</string>
+			<string>B48992B8-AA50-475C-A949-31E66C39A188</string>
 		</dict>
-		<key>9F9E5080-BBFB-4B73-8BC0-CC7133654DAC</key>
+		<key>C92C1CFF-5B02-4D61-B4BE-EF166903D0AC</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -57,91 +57,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>9F9E5080-BBFB-4B73-8BC0-CC7133654DAC.xcactivitylog</string>
-			<key>hasPrimaryLog</key>
-			<true/>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>W</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>6</integer>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>DigitalGram project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>DigitalGram</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Building project DigitalGram with scheme DigitalGram and configuration Release</string>
-			<key>timeStartedRecording</key>
-			<real>789919840.40054703</real>
-			<key>timeStoppedRecording</key>
-			<real>789919850.39963806</real>
-			<key>title</key>
-			<string>Building project DigitalGram with scheme DigitalGram and configuration Release</string>
-			<key>uniqueIdentifier</key>
-			<string>9F9E5080-BBFB-4B73-8BC0-CC7133654DAC</string>
-		</dict>
-		<key>B39F339A-4B07-4427-A939-54514FA612CC</key>
-		<dict>
-			<key>className</key>
-			<string>IDECommandLineBuildLog</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
-			<key>fileName</key>
-			<string>B39F339A-4B07-4427-A939-54514FA612CC.xcactivitylog</string>
-			<key>hasPrimaryLog</key>
-			<true/>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>W</string>
-				<key>totalNumberOfAnalyzerIssues</key>
-				<integer>0</integer>
-				<key>totalNumberOfErrors</key>
-				<integer>0</integer>
-				<key>totalNumberOfTestFailures</key>
-				<integer>0</integer>
-				<key>totalNumberOfWarnings</key>
-				<integer>6</integer>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>DigitalGram project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>DigitalGram</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Building project DigitalGram with scheme DigitalGram and configuration Release</string>
-			<key>timeStartedRecording</key>
-			<real>789919852.04925895</real>
-			<key>timeStoppedRecording</key>
-			<real>789919860.14353204</real>
-			<key>title</key>
-			<string>Building project DigitalGram with scheme DigitalGram and configuration Release</string>
-			<key>uniqueIdentifier</key>
-			<string>B39F339A-4B07-4427-A939-54514FA612CC</string>
-		</dict>
-		<key>F860889E-E1BE-4498-B090-14DD76F188DC</key>
-		<dict>
-			<key>className</key>
-			<string>IDECommandLineBuildLog</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
-			<key>fileName</key>
-			<string>F860889E-E1BE-4498-B090-14DD76F188DC.xcactivitylog</string>
+			<string>C92C1CFF-5B02-4D61-B4BE-EF166903D0AC.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -166,13 +82,97 @@
 			<key>signature</key>
 			<string>Cleaning project DigitalGram with scheme DigitalGram and configuration Release</string>
 			<key>timeStartedRecording</key>
-			<real>789919840.06109405</real>
+			<real>789921692.70886397</real>
 			<key>timeStoppedRecording</key>
-			<real>789919840.39883995</real>
+			<real>789921693.07459402</real>
 			<key>title</key>
 			<string>Cleaning project DigitalGram with scheme DigitalGram and configuration Release</string>
 			<key>uniqueIdentifier</key>
-			<string>F860889E-E1BE-4498-B090-14DD76F188DC</string>
+			<string>C92C1CFF-5B02-4D61-B4BE-EF166903D0AC</string>
+		</dict>
+		<key>E5A494D8-4DF8-4BFC-9BB9-EBCE7441826A</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>E5A494D8-4DF8-4BFC-9BB9-EBCE7441826A.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>6</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>DigitalGram project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>DigitalGram</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project DigitalGram with scheme DigitalGram and configuration Release</string>
+			<key>timeStartedRecording</key>
+			<real>789921707.07424903</real>
+			<key>timeStoppedRecording</key>
+			<real>789921715.735268</real>
+			<key>title</key>
+			<string>Building project DigitalGram with scheme DigitalGram and configuration Release</string>
+			<key>uniqueIdentifier</key>
+			<string>E5A494D8-4DF8-4BFC-9BB9-EBCE7441826A</string>
+		</dict>
+		<key>F75DE9A1-3243-471E-90B2-9C8904D25196</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F75DE9A1-3243-471E-90B2-9C8904D25196.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>W</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>6</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>DigitalGram project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>DigitalGram</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project DigitalGram with scheme DigitalGram and configuration Release</string>
+			<key>timeStartedRecording</key>
+			<real>789921693.07634604</real>
+			<key>timeStoppedRecording</key>
+			<real>789921704.983953</real>
+			<key>title</key>
+			<string>Building project DigitalGram with scheme DigitalGram and configuration Release</string>
+			<key>uniqueIdentifier</key>
+			<string>F75DE9A1-3243-471E-90B2-9C8904D25196</string>
 		</dict>
 	</dict>
 </dict>
