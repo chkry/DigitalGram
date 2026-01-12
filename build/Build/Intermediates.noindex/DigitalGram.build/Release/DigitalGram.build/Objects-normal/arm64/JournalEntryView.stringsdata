@@ -1,0 +1,336 @@
+{
+  "source": "/Users/chkry/Documents/CODE/MenuBarApp/DigitalGram/Views/JournalEntryView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Switch to Light Mode",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 63
+        }
+      },
+      {
+        "comment": "",
+        "key": "Switch to Dark Mode",
+        "location": {
+          "startingColumn": 61,
+          "startingLine": 63
+        }
+      },
+      {
+        "comment": "",
+        "key": "Settings",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "|",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 35
+        }
+      },
+      {
+        "comment": "",
+        "key": "Journal",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 25
+        }
+      },
+      {
+        "comment": "",
+        "key": "Entries",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 43
+        }
+      },
+      {
+        "comment": "",
+        "key": "Previous day",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 83
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select date",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 94
+        }
+      },
+      {
+        "comment": "",
+        "key": "Next day",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 110
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 40,
+          "startingLine": 96
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bold",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Italic",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 136
+        }
+      },
+      {
+        "comment": "",
+        "key": "Heading 1",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 145
+        }
+      },
+      {
+        "comment": "",
+        "key": "Heading 2",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 154
+        }
+      },
+      {
+        "comment": "",
+        "key": "Heading 3",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 163
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bullet list",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 171
+        }
+      },
+      {
+        "comment": "",
+        "key": "Checkbox",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "Insert link",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 187
+        }
+      },
+      {
+        "comment": "",
+        "key": "Code block",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 195
+        }
+      },
+      {
+        "comment": "",
+        "key": "Insert image",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 203
+        }
+      },
+      {
+        "comment": "",
+        "key": "Insert timestamp",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 211
+        }
+      },
+      {
+        "comment": "",
+        "key": "B",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "I",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 131
+        }
+      },
+      {
+        "comment": "",
+        "key": "H1",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 140
+        }
+      },
+      {
+        "comment": "",
+        "key": "H2",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 149
+        }
+      },
+      {
+        "comment": "",
+        "key": "H3",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld entries",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 268
+        }
+      },
+      {
+        "comment": "",
+        "key": "Show editor",
+        "location": {
+          "startingColumn": 41,
+          "startingLine": 263
+        }
+      },
+      {
+        "comment": "",
+        "key": "Show preview",
+        "location": {
+          "startingColumn": 57,
+          "startingLine": 263
+        }
+      },
+      {
+        "comment": "",
+        "key": "Markdown",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 257
+        }
+      },
+      {
+        "comment": "",
+        "key": "Preview",
+        "location": {
+          "startingColumn": 61,
+          "startingLine": 257
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 545
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld%%",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 580
+        }
+      },
+      {
+        "comment": "",
+        "key": "-",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 562
+        }
+      },
+      {
+        "comment": "",
+        "key": "+",
+        "location": {
+          "startingColumn": 36,
+          "startingLine": 574
+        }
+      },
+      {
+        "comment": "",
+        "key": "Download",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 591
+        }
+      },
+      {
+        "comment": "",
+        "key": "[%@](%@)",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 655
+        }
+      },
+      {
+        "comment": "",
+        "key": "All Entries",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 890
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld total",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 893
+        }
+      },
+      {
+        "comment": "",
+        "key": "•",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 991
+        }
+      },
+      {
+        "comment": "",
+        "key": "Download",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 1013
+        }
+      }
+    ]
+  },
+  "version": 1
+}
