@@ -1223,19 +1223,131 @@ struct SettingsView: View {
                 }
             }
             
-            // Copy the database file
-            try fileManager.copyItem(at: sourceURL, to: destinationURL)
-            
-            // Refresh the database list
-            loadAvailableDatabases()
-            
-            databaseOperationMessage = "Database '\(fileName)' imported successfully."
-            showingDatabaseOperationAlert = true
+            // Check if database with same name already exists
+            if fileManager.fileExists(atPath: destinationURL.path) {
+                // Merge databases instead of replacing
+                let result = mergeDatabases(sourceURL: sourceURL, destinationURL: destinationURL)
+                databaseOperationMessage = result.message
+                showingDatabaseOperationAlert = true
+                
+                // Refresh if needed
+                if result.success {
+                    NotificationCenter.default.post(name: NSNotification.Name("DatabaseChanged"), object: nil)
+                }
+            } else {
+                // Copy the database file (no conflict)
+                try fileManager.copyItem(at: sourceURL, to: destinationURL)
+                
+                // Refresh the database list
+                loadAvailableDatabases()
+                
+                databaseOperationMessage = "Database '\(fileName)' imported successfully."
+                showingDatabaseOperationAlert = true
+            }
             
         } catch {
             databaseOperationMessage = "Failed to import database: \(error.localizedDescription)"
             showingDatabaseOperationAlert = true
         }
+    }
+    
+    private func mergeDatabases(sourceURL: URL, destinationURL: URL) -> (success: Bool, message: String) {
+        var sourceDB: OpaquePointer?
+        var destDB: OpaquePointer?
+        
+        var imported = 0
+        var skipped = 0
+        var merged = 0
+        
+        // Open source database
+        guard sqlite3_open(sourceURL.path, &sourceDB) == SQLITE_OK else {
+            return (false, "Failed to open source database")
+        }
+        defer { sqlite3_close(sourceDB) }
+        
+        // Open destination database
+        guard sqlite3_open(destinationURL.path, &destDB) == SQLITE_OK else {
+            return (false, "Failed to open destination database")
+        }
+        defer { sqlite3_close(destDB) }
+        
+        // Read all entries from source database
+        let query = "SELECT date, year, month, day, content, created, updated FROM diary ORDER BY date;"
+        var statement: OpaquePointer?
+        
+        guard sqlite3_prepare_v2(sourceDB, query, -1, &statement, nil) == SQLITE_OK else {
+            return (false, "Failed to read source database")
+        }
+        defer { sqlite3_finalize(statement) }
+        
+        while sqlite3_step(statement) == SQLITE_ROW {
+            let date = String(cString: sqlite3_column_text(statement, 0))
+            let year = sqlite3_column_int(statement, 1)
+            let month = sqlite3_column_int(statement, 2)
+            let day = sqlite3_column_int(statement, 3)
+            let content = String(cString: sqlite3_column_text(statement, 4))
+            let created = String(cString: sqlite3_column_text(statement, 5))
+            let updated = sqlite3_column_text(statement, 6) != nil ? String(cString: sqlite3_column_text(statement, 6)) : created
+            
+            // Check if entry exists in destination
+            let checkQuery = "SELECT content FROM diary WHERE date = ?;"
+            var checkStmt: OpaquePointer?
+            
+            if sqlite3_prepare_v2(destDB, checkQuery, -1, &checkStmt, nil) == SQLITE_OK {
+                sqlite3_bind_text(checkStmt, 1, (date as NSString).utf8String, -1, nil)
+                
+                if sqlite3_step(checkStmt) == SQLITE_ROW {
+                    // Entry exists, check if content is different
+                    let existingContent = String(cString: sqlite3_column_text(checkStmt, 0))
+                    
+                    if existingContent == content {
+                        // Same content, skip
+                        skipped += 1
+                    } else {
+                        // Different content, merge by appending
+                        let separator = "\n\n---\n\n"
+                        let mergedContent = existingContent + separator + content
+                        
+                        let updateQuery = "UPDATE diary SET content = ?, updated = ? WHERE date = ?;"
+                        var updateStmt: OpaquePointer?
+                        
+                        if sqlite3_prepare_v2(destDB, updateQuery, -1, &updateStmt, nil) == SQLITE_OK {
+                            sqlite3_bind_text(updateStmt, 1, (mergedContent as NSString).utf8String, -1, nil)
+                            sqlite3_bind_text(updateStmt, 2, (updated as NSString).utf8String, -1, nil)
+                            sqlite3_bind_text(updateStmt, 3, (date as NSString).utf8String, -1, nil)
+                            
+                            if sqlite3_step(updateStmt) == SQLITE_DONE {
+                                merged += 1
+                            }
+                        }
+                        sqlite3_finalize(updateStmt)
+                    }
+                } else {
+                    // Entry doesn't exist, insert it
+                    let insertQuery = "INSERT INTO diary (date, year, month, day, content, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?);"
+                    var insertStmt: OpaquePointer?
+                    
+                    if sqlite3_prepare_v2(destDB, insertQuery, -1, &insertStmt, nil) == SQLITE_OK {
+                        sqlite3_bind_text(insertStmt, 1, (date as NSString).utf8String, -1, nil)
+                        sqlite3_bind_int(insertStmt, 2, year)
+                        sqlite3_bind_int(insertStmt, 3, month)
+                        sqlite3_bind_int(insertStmt, 4, day)
+                        sqlite3_bind_text(insertStmt, 5, (content as NSString).utf8String, -1, nil)
+                        sqlite3_bind_text(insertStmt, 6, (created as NSString).utf8String, -1, nil)
+                        sqlite3_bind_text(insertStmt, 7, (updated as NSString).utf8String, -1, nil)
+                        
+                        if sqlite3_step(insertStmt) == SQLITE_DONE {
+                            imported += 1
+                        }
+                    }
+                    sqlite3_finalize(insertStmt)
+                }
+            }
+            sqlite3_finalize(checkStmt)
+        }
+        
+        let message = "Merged: \(imported) new, \(merged) updated, \(skipped) skipped"
+        return (true, message)
     }
     
     private func handleDatabaseExport(panel: NSSavePanel, response: NSApplication.ModalResponse) {
