@@ -17,6 +17,9 @@ build/
 *.mode2v3
 *.perspectivev3
 
+# Scripts folder (available in dev branch)
+scripts/
+
 # Distribution
 dist/
 *.dmg
