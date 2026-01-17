@@ -111,6 +111,8 @@ class StorageManager {
     
     private func closeDatabase() {
         if db != nil {
+            // Checkpoint the WAL file before closing to ensure all data is written to main db
+            sqlite3_exec(db, "PRAGMA wal_checkpoint(TRUNCATE);", nil, nil, nil)
             sqlite3_close(db)
             db = nil
         }
@@ -202,6 +204,8 @@ class StorageManager {
                 #if DEBUG
                 print("Entry saved successfully")
                 #endif
+                // Checkpoint WAL file periodically to write data to main database
+                sqlite3_exec(db, "PRAGMA wal_checkpoint(PASSIVE);", nil, nil, nil)
             } else {
                 #if DEBUG
                 let errorMessage = String(cString: sqlite3_errmsg(db)!)
@@ -269,5 +273,12 @@ class StorageManager {
         closeDatabase()
         // Stop accessing security-scoped resource
         bookmarkedURL?.stopAccessingSecurityScopedResource()
+    }
+    
+    // Add method to manually checkpoint WAL file
+    func checkpointDatabase() {
+        if db != nil {
+            sqlite3_exec(db, "PRAGMA wal_checkpoint(TRUNCATE);", nil, nil, nil)
+        }
     }
 }

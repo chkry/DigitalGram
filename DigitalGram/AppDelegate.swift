@@ -203,4 +203,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             eventMonitor = nil
         }
     }
+    
+    func applicationWillTerminate(_ notification: Notification) {
+        // Checkpoint the database before app terminates to ensure all data is saved
+        StorageManager.shared.checkpointDatabase()
+    }
+    
+    func applicationDidResignActive(_ notification: Notification) {
+        // Checkpoint when app goes to background
+        StorageManager.shared.checkpointDatabase()
+    }
 }
