@@ -4,10 +4,170 @@
     "Localizable": [
       {
         "comment": "",
+        "key": "Migrate Data",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 219
+        }
+      },
+      {
+        "comment": "",
+        "key": "Import/Export",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 224
+        }
+      },
+      {
+        "comment": "",
+        "key": "Database Operation",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 229
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create New Database",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 234
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Database",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 243
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rename Database",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 251
+        }
+      },
+      {
+        "comment": "",
         "key": "Changes are applied immediately",
         "location": {
           "startingColumn": 22,
-          "startingLine": 105
+          "startingLine": 207
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 220
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 225
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 230
+        }
+      },
+      {
+        "comment": "",
+        "key": "Database Name",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 235
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 236
+        }
+      },
+      {
+        "comment": "",
+        "key": "Create",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 237
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter a name for the new database",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 241
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 244
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 245
+        }
+      },
+      {
+        "comment": "",
+        "key": "Are you sure you want to delete '%@'? This action cannot be undone.",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 249
+        }
+      },
+      {
+        "comment": "",
+        "key": "New Name",
+        "location": {
+          "startingColumn": 23,
+          "startingLine": 252
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 253
+        }
+      },
+      {
+        "comment": "",
+        "key": "Rename",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 254
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter a new name for '%@'",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 258
         }
       },
       {
@@ -15,7 +175,7 @@
         "key": "Settings",
         "location": {
           "startingColumn": 18,
-          "startingLine": 121
+          "startingLine": 264
         }
       },
       {
@@ -23,7 +183,7 @@
         "key": "Done",
         "location": {
           "startingColumn": 20,
-          "startingLine": 125
+          "startingLine": 268
         }
       },
       {
@@ -31,7 +191,7 @@
         "key": "Choose your color theme",
         "location": {
           "startingColumn": 22,
-          "startingLine": 144
+          "startingLine": 287
         }
       },
       {
@@ -39,7 +199,7 @@
         "key": "Theme",
         "location": {
           "startingColumn": 23,
-          "startingLine": 141
+          "startingLine": 284
         }
       },
       {
@@ -47,7 +207,7 @@
         "key": "Database and images are stored here:",
         "location": {
           "startingColumn": 22,
-          "startingLine": 167
+          "startingLine": 313
         }
       },
       {
@@ -55,7 +215,7 @@
         "key": "Storage Location",
         "location": {
           "startingColumn": 23,
-          "startingLine": 164
+          "startingLine": 310
         }
       },
       {
@@ -63,7 +223,7 @@
         "key": "Change Location...",
         "location": {
           "startingColumn": 32,
-          "startingLine": 183
+          "startingLine": 329
         }
       },
       {
@@ -71,7 +231,7 @@
         "key": "Open in Finder",
         "location": {
           "startingColumn": 32,
-          "startingLine": 187
+          "startingLine": 333
         }
       },
       {
@@ -79,7 +239,7 @@
         "key": "Reset to Default",
         "location": {
           "startingColumn": 32,
-          "startingLine": 191
+          "startingLine": 338
         }
       },
       {
@@ -87,7 +247,7 @@
         "key": "Manage multiple journal databases",
         "location": {
           "startingColumn": 22,
-          "startingLine": 209
+          "startingLine": 356
         }
       },
       {
@@ -95,7 +255,7 @@
         "key": "Currently active: %@",
         "location": {
           "startingColumn": 22,
-          "startingLine": 308
+          "startingLine": 455
         }
       },
       {
@@ -103,7 +263,7 @@
         "key": "Databases",
         "location": {
           "startingColumn": 23,
-          "startingLine": 206
+          "startingLine": 353
         }
       },
       {
@@ -111,7 +271,7 @@
         "key": "Create new database",
         "location": {
           "startingColumn": 31,
-          "startingLine": 251
+          "startingLine": 398
         }
       },
       {
@@ -119,7 +279,7 @@
         "key": "Import existing database",
         "location": {
           "startingColumn": 31,
-          "startingLine": 260
+          "startingLine": 407
         }
       },
       {
@@ -127,7 +287,7 @@
         "key": "Export selected database",
         "location": {
           "startingColumn": 31,
-          "startingLine": 270
+          "startingLine": 417
         }
       },
       {
@@ -135,7 +295,7 @@
         "key": "Delete selected database",
         "location": {
           "startingColumn": 31,
-          "startingLine": 286
+          "startingLine": 433
         }
       },
       {
@@ -143,7 +303,7 @@
         "key": "Rename selected database",
         "location": {
           "startingColumn": 31,
-          "startingLine": 303
+          "startingLine": 450
         }
       },
       {
@@ -151,7 +311,7 @@
         "key": "Backup or restore your journal entries",
         "location": {
           "startingColumn": 26,
-          "startingLine": 325
+          "startingLine": 472
         }
       },
       {
@@ -159,7 +319,7 @@
         "key": "Import & Export",
         "location": {
           "startingColumn": 27,
-          "startingLine": 322
+          "startingLine": 469
         }
       },
       {
@@ -167,7 +327,7 @@
         "key": "Export",
         "location": {
           "startingColumn": 34,
-          "startingLine": 332
+          "startingLine": 479
         }
       },
       {
@@ -175,7 +335,7 @@
         "key": "Export as CSV",
         "location": {
           "startingColumn": 46,
-          "startingLine": 340
+          "startingLine": 487
         }
       },
       {
@@ -183,7 +343,7 @@
         "key": "Export as Excel",
         "location": {
           "startingColumn": 46,
-          "startingLine": 349
+          "startingLine": 496
         }
       },
       {
@@ -191,7 +351,7 @@
         "key": "Import",
         "location": {
           "startingColumn": 34,
-          "startingLine": 361
+          "startingLine": 508
         }
       },
       {
@@ -199,7 +359,7 @@
         "key": "Import will merge entries. Existing entries with the same ID will be updated.",
         "location": {
           "startingColumn": 34,
-          "startingLine": 375
+          "startingLine": 522
         }
       },
       {
@@ -207,7 +367,7 @@
         "key": "Import from CSV",
         "location": {
           "startingColumn": 42,
-          "startingLine": 368
+          "startingLine": 515
         }
       },
       {
@@ -215,7 +375,7 @@
         "key": "All journal entries and images are stored locally on your Mac. No data is synced to the cloud.",
         "location": {
           "startingColumn": 26,
-          "startingLine": 402
+          "startingLine": 549
         }
       },
       {
@@ -223,7 +383,7 @@
         "key": "Database Information",
         "location": {
           "startingColumn": 27,
-          "startingLine": 389
+          "startingLine": 536
         }
       },
       {
@@ -231,7 +391,7 @@
         "key": "About",
         "location": {
           "startingColumn": 27,
-          "startingLine": 414
+          "startingLine": 561
         }
       },
       {
@@ -239,7 +399,7 @@
         "key": "Author",
         "location": {
           "startingColumn": 34,
-          "startingLine": 419
+          "startingLine": 566
         }
       },
       {
@@ -247,7 +407,7 @@
         "key": "Chakradhar Reddy Pakala",
         "location": {
           "startingColumn": 34,
-          "startingLine": 422
+          "startingLine": 569
         }
       },
       {
@@ -255,7 +415,7 @@
         "key": "github.com/chkry",
         "location": {
           "startingColumn": 40,
-          "startingLine": 433
+          "startingLine": 580
         }
       },
       {
@@ -263,7 +423,7 @@
         "key": "linkedin.com/in/chkry",
         "location": {
           "startingColumn": 40,
-          "startingLine": 446
+          "startingLine": 593
         }
       },
       {
@@ -271,7 +431,7 @@
         "key": "www.chakrireddy.com",
         "location": {
           "startingColumn": 40,
-          "startingLine": 459
+          "startingLine": 606
         }
       },
       {
@@ -279,7 +439,7 @@
         "key": "Your feedback helps make DigitalGram better!",
         "location": {
           "startingColumn": 34,
-          "startingLine": 494
+          "startingLine": 641
         }
       },
       {
@@ -287,7 +447,7 @@
         "key": "Feedback & Feature Requests",
         "location": {
           "startingColumn": 38,
-          "startingLine": 475
+          "startingLine": 622
         }
       },
       {
@@ -295,7 +455,7 @@
         "key": "Send your suggestions to:",
         "location": {
           "startingColumn": 38,
-          "startingLine": 481
+          "startingLine": 628
         }
       },
       {
@@ -303,7 +463,7 @@
         "key": "ChakradharReddyPakala@gmail.com",
         "location": {
           "startingColumn": 40,
-          "startingLine": 484
+          "startingLine": 631
         }
       }
     ]

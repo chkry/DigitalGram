@@ -1,2 +1,0 @@
-Target dependency graph (1 target)
-Target 'DigitalGram' in project 'DigitalGram' (no dependencies)

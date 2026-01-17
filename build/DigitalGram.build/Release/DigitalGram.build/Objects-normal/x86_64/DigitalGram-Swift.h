@@ -312,6 +312,8 @@ SWIFT_CLASS("_TtC11DigitalGram11AppDelegate")
 - (void)openSettings;
 - (void)toggleLaunchAtLogin;
 - (void)quitApp;
+- (void)applicationWillTerminate:(NSNotification * _Nonnull)notification;
+- (void)applicationDidResignActive:(NSNotification * _Nonnull)notification;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
