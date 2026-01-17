@@ -1,0 +1,47 @@
+# Xcode User Data
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+xcuserdata/
+DerivedData/
+
+# Xcode Build Files
+build/
+*.app
+*.dSYM
+*.swiftmodule
+
+# Xcode Editor Settings
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Distribution
+dist/
+*.dmg
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.DS_Store
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# SPM
+.swiftpm/
+
+# Compiled binaries
+*.o
+*.a
+*.out
+
+# Logs (excluding build logs that may be committed)
+local.log
+*.log.local
